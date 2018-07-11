@@ -38,16 +38,6 @@ namespace Mobilize.Grammar.Graph.Generic
         }
 
         /// <summary>
-        /// Adds the vertex.
-        /// </summary>
-        /// <param name="vertex">The vertex.</param>
-        public void AddVertex(T vertex)
-        {
-            this.vertex.Add(vertex);
-        }
-
-
-        /// <summary>
         /// Adds the edge.
         /// </summary>
         /// <param name="endpoint1">The endpoint1.</param>
@@ -55,6 +45,15 @@ namespace Mobilize.Grammar.Graph.Generic
         public void AddEdge(T endpoint1, T endpoint2)
         {
             this.edges.Add(new Edge<T>(endpoint1, endpoint2));
+        }
+
+        /// <summary>
+        /// Adds the vertex.
+        /// </summary>
+        /// <param name="vertex">The vertex.</param>
+        public void AddVertex(T vertex)
+        {
+            this.vertex.Add(vertex);
         }
     }
 }
