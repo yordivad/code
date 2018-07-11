@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Antlr4UseCSharpGenerator>True</Antlr4UseCSharpGenerator>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Antlr4" Version="4.6.5-rc002" />
+    <PackageReference Include="Antlr4.CodeGenerator" Version="4.6.5-rc002" />
+    <PackageReference Include="Antlr4.Runtime" Version="4.6.5-rc002" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Antlr4 Include="TinyParser.g4">
+      <Generator>MSBuild:Compile</Generator>
+      <Listener>True</Listener>
+      <Visitor>True</Visitor>
+    </Antlr4>
+    <Antlr4 Include="TinyLexer.g4">
+      <Generator>MSBuild:Compile</Generator>
+      <Listener>True</Listener>
+      <Visitor>True</Visitor>
+    </Antlr4>
+  </ItemGroup>
+</Project>
