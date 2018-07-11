@@ -5,6 +5,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using Mobilize.Grammar.Lenguage;
+
 namespace Mobilize.Grammar
 {
     /// <summary>

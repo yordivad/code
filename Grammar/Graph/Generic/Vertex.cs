@@ -38,7 +38,7 @@ namespace Mobilize.Grammar.Graph.Generic
         /// Gets the node.
         /// </summary>
         /// <value>The node.</value>
-        public T Node { get; }
+        public T Node => this.node;
 
         /// <summary>
         /// Implements the == operator.

@@ -5,6 +5,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.IO;
+
 namespace Mobilize.Grammar
 {
     using System.Collections.Generic;
@@ -36,34 +38,7 @@ namespace Mobilize.Grammar
         /// <value>The errors.</value>
         public IEnumerable<Error> Errors => this.errors;
 
-        /// <summary>
-        /// Syntax error.
-        /// </summary>
-        /// <param name="recognizer">The recognizer.</param>
-        /// <param name="offendingSymbol">The offending symbol.</param>
-        /// <param name="line">The line.</param>
-        /// <param name="charPositionInLine">The character position in line.</param>
-        /// <param name="msg">The MSG.</param>
-        /// <param name="e">The e.</param>
-        public override void SyntaxError(
-            IRecognizer recognizer,
-            IToken offendingSymbol,
-            int line,
-            int charPositionInLine,
-            string msg,
-            RecognitionException e)
-        {
-            base.SyntaxError(recognizer, offendingSymbol, line, charPositionInLine, msg, e);
-            this.errors.Add(
-                new Error
-                    {
-                        CharLine = charPositionInLine,
-                        Line = line,
-                        Message = msg,
-                        Source =
-                            $"{offendingSymbol.Text} {recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
-                    });
-        }
+
 
         /// <summary>
         /// Upon syntax error, notify any interested parties.
@@ -112,6 +87,19 @@ namespace Mobilize.Grammar
                         Message = msg,
                         Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
                     });
+        }
+
+        public void SyntaxError(TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine,
+            string msg, RecognitionException e)
+        {
+            this.errors.Add(
+                new Error
+                {
+                    CharLine = charPositionInLine,
+                    Line = line,
+                    Message = msg,
+                    Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
+                });
         }
     }
 }

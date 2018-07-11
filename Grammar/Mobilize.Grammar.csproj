@@ -4,9 +4,7 @@
     <Antlr4UseCSharpGenerator>True</Antlr4UseCSharpGenerator>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Antlr4" Version="4.6.5-rc002" />
-    <PackageReference Include="Antlr4.CodeGenerator" Version="4.6.5-rc002" />
-    <PackageReference Include="Antlr4.Runtime" Version="4.6.5-rc002" />
+    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.7.1.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
