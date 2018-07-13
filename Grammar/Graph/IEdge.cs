@@ -7,17 +7,16 @@
 
 namespace Mobilize.Grammar.Graph
 {
-    using System;
-
     /// <summary>
     /// Interface IEdge
     /// </summary>
-    public interface IEdge
+    /// <typeparam name="T">The type of the vertex</typeparam>
+    public interface IEdge<T>
     {
         /// <summary>
         /// Gets the endpoints.
         /// </summary>
         /// <value>The endpoints.</value>
-        Tuple<IVertex, IVertex> Endpoints { get;  }
+        (T In, T Out) Endpoints { get; }
     }
 }

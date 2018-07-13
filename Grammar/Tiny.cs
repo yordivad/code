@@ -5,13 +5,13 @@
 // <summary></summary>
 // ***********************************************************************
 
-using Mobilize.Grammar.Lenguage;
-
 namespace Mobilize.Grammar
 {
     using System.Linq;
 
     using Antlr4.Runtime;
+
+    using Mobilize.Grammar.Lenguage;
 
     /// <summary>
     /// Class Tiny.

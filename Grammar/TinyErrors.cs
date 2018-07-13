@@ -5,11 +5,10 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.IO;
-
 namespace Mobilize.Grammar
 {
     using System.Collections.Generic;
+    using System.IO;
 
     using Antlr4.Runtime;
 
@@ -37,8 +36,6 @@ namespace Mobilize.Grammar
         /// </summary>
         /// <value>The errors.</value>
         public IEnumerable<Error> Errors => this.errors;
-
-
 
         /// <summary>
         /// Upon syntax error, notify any interested parties.
@@ -89,17 +86,23 @@ namespace Mobilize.Grammar
                     });
         }
 
-        public void SyntaxError(TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine,
-            string msg, RecognitionException e)
+        public void SyntaxError(
+            TextWriter output,
+            IRecognizer recognizer,
+            int offendingSymbol,
+            int line,
+            int charPositionInLine,
+            string msg,
+            RecognitionException e)
         {
             this.errors.Add(
                 new Error
-                {
-                    CharLine = charPositionInLine,
-                    Line = line,
-                    Message = msg,
-                    Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
-                });
+                    {
+                        CharLine = charPositionInLine,
+                        Line = line,
+                        Message = msg,
+                        Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
+                    });
         }
     }
 }

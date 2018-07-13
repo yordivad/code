@@ -5,10 +5,10 @@
 // <summary></summary>
 // ***********************************************************************
 
-using Mobilize.Grammar.Lenguage;
-
 namespace Mobilize.Grammar
 {
+    using Mobilize.Grammar.Lenguage;
+
     /// <summary>
     /// Class TinyVisitor.
     /// </summary>

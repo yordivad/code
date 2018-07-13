@@ -12,30 +12,31 @@ namespace Mobilize.Grammar.Graph
     /// <summary>
     /// Interface IGraph
     /// </summary>
-    public interface IGraph
+    /// <typeparam name="T">The type of the vertice</typeparam>
+    public interface IGraph<T>
     {
         /// <summary>
         /// Gets the edges.
         /// </summary>
         /// <value>The edges.</value>
-        IEnumerable<IEdge> Edges { get; }
+        IEnumerable<IEdge<T>> Edges { get; }
 
         /// <summary>
         /// Gets the vertices.
         /// </summary>
         /// <value>The vertices.</value>
-        IEnumerable<IVertex> Vertices { get; }
+        IEnumerable<T> Vertex { get; }
 
         /// <summary>
         /// Adds the edge.
         /// </summary>
         /// <param name="edge">The edge.</param>
-        void AddEdge(IEdge edge);
+        void AddEdge(IEdge<T> edge);
 
         /// <summary>
-        /// Adds the endpoint.
+        /// Adds the vertice.
         /// </summary>
-        /// <param name="endpoint">The endpoint.</param>
-        void AddVertice(IVertex endpoint);
+        /// <param name="vertice">The vertice.</param>
+        void AddVertex(T vertice);
     }
 }
