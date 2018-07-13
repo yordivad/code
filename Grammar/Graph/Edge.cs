@@ -16,7 +16,7 @@ namespace Mobilize.Grammar.Graph.Generic
     /// <typeparam name="T">The generic type</typeparam>
     /// <seealso cref="Edge{T}" />
     /// <seealso cref="Mobilize.Grammar.Graph.IEdge" />
-    public sealed class Edge<T> : IEdge<T>, IEquatable<Edge<T>>
+    public class Edge<T> : IEdge<T>, IEquatable<Edge<T>>
         where T : IComparable
     {
         /// <summary>

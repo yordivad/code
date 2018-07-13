@@ -7,19 +7,23 @@
 
 namespace Mobilize.Grammar.Graph
 {
+    using System;
     using System.Collections.Generic;
+
+    using Mobilize.Grammar.Graph.Generic;
 
     /// <summary>
     /// Interface IGraph
     /// </summary>
     /// <typeparam name="T">The type of the vertice</typeparam>
     public interface IGraph<T>
+        where T : IComparable
     {
         /// <summary>
         /// Gets the edges.
         /// </summary>
         /// <value>The edges.</value>
-        IEnumerable<IEdge<T>> Edges { get; }
+        IEnumerable<Edge<T>> Edges { get; }
 
         /// <summary>
         /// Gets the vertices.
@@ -31,7 +35,7 @@ namespace Mobilize.Grammar.Graph
         /// Adds the edge.
         /// </summary>
         /// <param name="edge">The edge.</param>
-        void AddEdge(IEdge<T> edge);
+        void AddEdge(Edge<T> edge);
 
         /// <summary>
         /// Adds the vertice.

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from /home/roy/workspace/Mobilize/Grammar/TinyParser.g4 by ANTLR 4.7
+// Generated from S:/Workspace/Analysis/Mobilize/Grammar/Syntax\TinyParser.g4 by ANTLR 4.7
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,7 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace Mobilize.Grammar.Lenguage {
+namespace Mobilize.Grammar.Language {
 
 using Antlr4.Runtime.Misc;
 using IErrorNode = Antlr4.Runtime.Tree.IErrorNode;
@@ -169,4 +169,4 @@ public partial class TinyParserBaseListener : ITinyParserListener {
 	/// <remarks>The default implementation does nothing.</remarks>
 	public virtual void VisitErrorNode([NotNull] IErrorNode node) { }
 }
-} // namespace Mobilize.Grammar.Lenguage
+} // namespace Mobilize.Grammar.Language

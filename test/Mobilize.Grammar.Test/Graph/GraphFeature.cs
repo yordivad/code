@@ -81,6 +81,34 @@ namespace Mobilize.Grammar.Test.Graph
                 and => this.TableAsExpected(3, 3, 0));
         }
 
+        [Scenario("Tracing")]
+        [TestMethod]
+        public void Trace()
+        {
+            this.RunScenario(
+                given => this.CreateGraph<int>(),
+                and => this.AddVertexToGraph(1),
+                and => this.AddVertexToGraph(2),
+                and => this.AddVertexToGraph(3),
+                and => this.AddVertexToGraph(4),
+                and => this.AddVertexToGraph(5),
+                and => this.AddEdgeToGraph(1, 1),
+                and => this.AddEdgeToGraph(1, 2),
+                and => this.AddEdgeToGraph(1, 4),
+                and => this.AddEdgeToGraph(2, 5),
+                and => this.AddEdgeToGraph(5, 2),
+                when => this.TraceGraph<int>(1));
+
+        }
+
+        private void TraceGraph<T>(T vertex)
+            where T : IComparable
+        {
+            var graph = this.Scenario.Get<Graph<T>>("graph");
+            var trace = graph.Trace(vertex);
+        }
+
+
         /// <summary>
         /// Generics the graph.
         /// </summary>

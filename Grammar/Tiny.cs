@@ -11,7 +11,7 @@ namespace Mobilize.Grammar
 
     using Antlr4.Runtime;
 
-    using Mobilize.Grammar.Lenguage;
+    using Mobilize.Grammar.Language;
 
     /// <summary>
     /// Class Tiny.

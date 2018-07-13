@@ -7,12 +7,13 @@
 
 namespace Mobilize.Grammar
 {
-    using Mobilize.Grammar.Lenguage;
+    using Mobilize.Grammar.Language;
+    
 
     /// <summary>
     /// Class TinyVisitor.
     /// </summary>
-    /// <seealso cref="Mobilize.Grammar.Lenguage.TinyParserBaseListener" />
+    /// <seealso cref="TinyParserBaseListener" />
     public class TinyVisitor : TinyParserBaseListener
     {
         /// <summary>

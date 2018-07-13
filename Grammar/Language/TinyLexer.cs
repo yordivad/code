@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from /home/roy/workspace/Mobilize/Grammar/TinyLexer.g4 by ANTLR 4.7
+// Generated from S:/Workspace/Analysis/Mobilize/Grammar/Syntax\TinyLexer.g4 by ANTLR 4.7
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,7 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace Mobilize.Grammar.Lenguage {
+namespace Mobilize.Grammar.Language {
 using System;
 using System.IO;
 using System.Text;
@@ -288,4 +288,4 @@ public partial class TinyLexer : Lexer {
 
 
 }
-} // namespace Mobilize.Grammar.Lenguage
+} // namespace Mobilize.Grammar.Language

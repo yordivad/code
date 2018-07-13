@@ -27,4 +27,12 @@
       <Visitor>True</Visitor>
     </Antlr4>
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Syntax\DotLexer.g4">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Syntax\DotParser.g4">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
 </Project>

@@ -28,7 +28,7 @@ namespace Mobilize.Grammar.Graph
         /// <summary>
         /// The edges
         /// </summary>
-        private readonly ISet<IEdge<TVertex>> edges;
+        private readonly ISet<Edge<TVertex>> edges;
 
         /// <summary>
         /// The vertice
@@ -40,7 +40,7 @@ namespace Mobilize.Grammar.Graph
         /// </summary>
         public Graph()
         {
-            this.edges = new HashSet<IEdge<TVertex>>();
+            this.edges = new HashSet<Edge<TVertex>>();
             this.vertex = new HashSet<TVertex>();
         }
 
@@ -48,7 +48,7 @@ namespace Mobilize.Grammar.Graph
         /// Gets the edges.
         /// </summary>
         /// <value>The edges.</value>
-        public IEnumerable<IEdge<TVertex>> Edges => this.edges;
+        public IEnumerable<Edge<TVertex>> Edges => this.edges;
 
         /// <summary>
         /// Gets the vertex.
@@ -60,7 +60,7 @@ namespace Mobilize.Grammar.Graph
         /// Adds the edge.
         /// </summary>
         /// <param name="edge">The edge.</param>
-        public void AddEdge(IEdge<TVertex> edge) => this.edges.Add(edge);
+        public void AddEdge(Edge<TVertex> edge) => this.edges.Add(edge);
 
         /// <summary>
         /// Adds the edge.
@@ -139,5 +139,42 @@ namespace Mobilize.Grammar.Graph
         /// <returns>The list of out vertex.</returns>
         public IEnumerable<TVertex> OutVertex(TVertex vertice) =>
             this.edges.Where(v => v.Endpoints.Out.Is(vertice)).Select(c => c.Endpoints.In);
+
+        /// <summary>
+        /// Traces the specified vertex.
+        /// </summary>
+        /// <param name="vertex">The vertex.</param>
+        /// <returns>the list of the trace.</returns>
+        public IEnumerable<Edge<TVertex>> Trace(TVertex vertex)
+        {
+            var visited = new HashSet<Edge<TVertex>>();
+            var path = new HashSet<Edge<TVertex>>();
+
+            var edge = this.Next(vertex, visited);
+            while (edge != null)
+            {
+                if (!visited.Contains(edge))
+                {
+                    visited.Add(edge);
+                    path.Add(edge);
+                    vertex = edge.Endpoints.Out;
+                }
+
+                edge = this.Next(vertex, visited);
+            }
+
+            return path;
+        }
+
+        /// <summary>
+        /// Nexts the specified vertex.
+        /// </summary>
+        /// <param name="vertex">The vertex.</param>
+        /// <param name="visited">The visited.</param>
+        /// <returns>Some edges</returns>
+        private Edge<TVertex> Next(TVertex vertex, ISet<Edge<TVertex>> visited)
+        {
+            return this.edges.FirstOrDefault(c => c.Endpoints.In.Is(vertex) && visited.All(e => e != c));
+        }
     }
 }

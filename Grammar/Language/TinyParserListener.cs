@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from /home/roy/workspace/Mobilize/Grammar/TinyParser.g4 by ANTLR 4.7
+// Generated from S:/Workspace/Analysis/Mobilize/Grammar/Syntax\TinyParser.g4 by ANTLR 4.7
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,7 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace Mobilize.Grammar.Lenguage {
+namespace Mobilize.Grammar.Language {
 using Antlr4.Runtime.Misc;
 using IParseTreeListener = Antlr4.Runtime.Tree.IParseTreeListener;
 using IToken = Antlr4.Runtime.IToken;
@@ -132,4 +132,4 @@ public interface ITinyParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitInteger([NotNull] TinyParser.IntegerContext context);
 }
-} // namespace Mobilize.Grammar.Lenguage
+} // namespace Mobilize.Grammar.Language
