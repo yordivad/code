@@ -26,10 +26,10 @@ attribute_statement
    ;
 
 attribute_list
-   : ( LBRACK a_list? RBRACK )+
+   : ( LBRACK property? RBRACK )+
    ;
 
-a_list
+property
    : ( id ( ASSIGN id )? COMMA ? )+
    ;
 

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <Antlr4UseCSharpGenerator>True</Antlr4UseCSharpGenerator>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -13,26 +13,15 @@
     <PackageReference Include="Antlr4.Runtime.Standard" Version="4.7.1.1" />
     <PackageReference Include="Deedle" Version="1.2.5" />
     <PackageReference Include="morelinq" Version="3.0.0" />
+    <PackageReference Include="StringTemplate4" Version="4.0.8" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <Antlr4 Include="TinyParser.g4">
-      <Generator>MSBuild:Compile</Generator>
-      <Listener>True</Listener>
-      <Visitor>True</Visitor>
-    </Antlr4>
-    <Antlr4 Include="TinyLexer.g4">
-      <Generator>MSBuild:Compile</Generator>
-      <Listener>True</Listener>
-      <Visitor>True</Visitor>
-    </Antlr4>
+    <Content Include="Emitter\Dot\dot.stg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Syntax\DotLexer.g4">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Syntax\DotParser.g4">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
+    <None Remove="Emitter\Templates\template.stg" />
   </ItemGroup>
 </Project>

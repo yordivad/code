@@ -8,13 +8,13 @@
 namespace Mobilize.Grammar.Graph
 {
     /// <summary>
-    /// Interface IEdge
+    ///     Interface IEdge
     /// </summary>
     /// <typeparam name="T">The type of the vertex</typeparam>
     public interface IEdge<T>
     {
         /// <summary>
-        /// Gets the endpoints.
+        ///     Gets the endpoints.
         /// </summary>
         /// <value>The endpoints.</value>
         (T In, T Out) Endpoints { get; }

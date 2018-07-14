@@ -5,26 +5,29 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Collections.Generic;
+
 namespace Mobilize.Grammar.Graph
 {
-    using System.Collections.Generic;
-
     /// <summary>
-    /// Class GraphExtension.
+    ///     Class GraphExtension.
     /// </summary>
     public static class GraphExtension
     {
         /// <summary>
-        /// Determines whether [is] [the specified other].
+        ///     Determines whether [is] [the specified other].
         /// </summary>
         /// <typeparam name="T">The type of the t.</typeparam>
         /// <param name="item">The item.</param>
         /// <param name="other">The other.</param>
         /// <returns><c>true</c> if [is] [the specified other]; otherwise, <c>false</c>.</returns>
-        public static bool Is<T>(this T item, T other) => EqualityComparer<T>.Default.Equals(item, other);
+        public static bool Is<T>(this T item, T other)
+        {
+            return EqualityComparer<T>.Default.Equals(item, other);
+        }
 
         /// <summary>
-        /// Determines whether [has] [the specified in].
+        ///     Determines whether [has] [the specified in].
         /// </summary>
         /// <typeparam name="T">The type of vertex</typeparam>
         /// <param name="edge">The edge.</param>

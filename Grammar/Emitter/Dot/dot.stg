@@ -1,0 +1,18 @@
+﻿graph(it) ::= 
+<<
+<kind(it.KindName)> <it.Identifier> {
+    <statement(it.Statements)>
+}
+>>
+
+kind(name) ::= "<name>"
+
+statement(items) ::= 
+<<
+<items: {item |<item.KindName><if(item.HasProperties)> [<property(item.Properties)>]<endif> }; separator= "; \n" >
+>>
+
+property(properties) ::= 
+<<
+<properties: {it| <it.Label> = <it.Value>};  separator=",">
+>>

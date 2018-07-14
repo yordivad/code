@@ -5,40 +5,38 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Linq;
+using Antlr4.Runtime;
+using Mobilize.Grammar.Language;
+
 namespace Mobilize.Grammar
 {
-    using System.Linq;
-
-    using Antlr4.Runtime;
-
-    using Mobilize.Grammar.Language;
-
     /// <summary>
-    /// Class Tiny.
+    ///     Class Tiny.
     /// </summary>
     public class Tiny
     {
         /// <summary>
-        /// The errors
+        ///     The errors
         /// </summary>
         private readonly TinyErrors errors;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Tiny"/> class.
+        ///     Initializes a new instance of the <see cref="Tiny" /> class.
         /// </summary>
         public Tiny()
         {
-            this.errors = new TinyErrors();
+            errors = new TinyErrors();
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance has errors.
+        ///     Gets a value indicating whether this instance has errors.
         /// </summary>
         /// <value><c>true</c> if this instance has errors; otherwise, <c>false</c>.</value>
-        public bool HasErrors => this.errors.Errors.Any();
+        public bool HasErrors => errors.Errors.Any();
 
         /// <summary>
-        /// Trees the specified code.
+        ///     Trees the specified code.
         /// </summary>
         /// <param name="code">The code.</param>
         /// <returns>the parser.</returns>
@@ -46,10 +44,10 @@ namespace Mobilize.Grammar
         {
             var stream = new AntlrInputStream(code);
             var lexer = new TinyLexer(stream);
-            lexer.AddErrorListener(this.errors);
+            lexer.AddErrorListener(errors);
             var token = new CommonTokenStream(lexer);
             var parser = new TinyParser(token);
-            parser.AddErrorListener(this.errors);
+            parser.AddErrorListener(errors);
             return parser.unit();
         }
     }

@@ -5,40 +5,39 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
+using System.Collections.Generic;
+using Mobilize.Grammar.Graph.Generic;
+
 namespace Mobilize.Grammar.Graph
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Mobilize.Grammar.Graph.Generic;
-
     /// <summary>
-    /// Interface IGraph
+    ///     Interface IGraph
     /// </summary>
     /// <typeparam name="T">The type of the vertice</typeparam>
     public interface IGraph<T>
         where T : IComparable
     {
         /// <summary>
-        /// Gets the edges.
+        ///     Gets the edges.
         /// </summary>
         /// <value>The edges.</value>
         IEnumerable<Edge<T>> Edges { get; }
 
         /// <summary>
-        /// Gets the vertices.
+        ///     Gets the vertices.
         /// </summary>
         /// <value>The vertices.</value>
         IEnumerable<T> Vertex { get; }
 
         /// <summary>
-        /// Adds the edge.
+        ///     Adds the edge.
         /// </summary>
         /// <param name="edge">The edge.</param>
         void AddEdge(Edge<T> edge);
 
         /// <summary>
-        /// Adds the vertice.
+        ///     Adds the vertice.
         /// </summary>
         /// <param name="vertice">The vertice.</param>
         void AddVertex(T vertice);
