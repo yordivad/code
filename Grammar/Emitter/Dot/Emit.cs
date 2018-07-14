@@ -1,19 +1,17 @@
-﻿
+﻿using Mobilize.Grammar.Emitter.Dot.Model;
 
 namespace Mobilize.Grammar.Emitter.Dot
 {
-    using Model;
-    
     public static class Emit
     {
-        public static Graph Graph(string identifier, bool strict = false)
+        public static Model.Graph Graph(string identifier, bool strict = false)
         {
-            return new Graph(GraphKind.graph, identifier, strict);
+            return new Model.Graph(GraphKind.graph, identifier, strict);
         }
-        
-        public static Graph DiGraph(string identifier, bool strict = false)
+
+        public static Model.Graph DiGraph(string identifier, bool strict = false)
         {
-            return new Graph(GraphKind.digraph, identifier, strict);
+            return new Model.Graph(GraphKind.digraph, identifier, strict);
         }
 
         public static AttributeStatement AttributeStatement(AttributeKind kind)
@@ -27,7 +25,7 @@ namespace Mobilize.Grammar.Emitter.Dot
             return statement;
         }
 
-        public static Graph Statement(this Graph graph, Statement statement)
+        public static Model.Graph Statement(this Model.Graph graph, Statement statement)
         {
             graph.AddStatement(statement);
             return graph;

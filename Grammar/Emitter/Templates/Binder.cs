@@ -26,7 +26,9 @@ namespace Mobilize.Grammar.Templates
             return this;
         }
 
-        public string Render() => template.Render();
-        
+        public string Render()
+        {
+            return template.Render();
+        }
     }
 }

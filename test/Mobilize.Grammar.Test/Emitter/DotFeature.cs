@@ -23,13 +23,13 @@ namespace Mobilize.Grammar.Test.Emitter
         [TestMethod]
         public void Emiter()
         {
-            this.RunScenario(given => this.SetAGraph(), when => this.GraphRender());
+            RunScenario(given => SetAGraph(), when => GraphRender());
         }
 
         private void GraphRender()
         {
-            var graph = this.Scenario.Get<Grammar.Emitter.Dot.Model.Graph>("graph");
-           var x = graph.Render();
+            var graph = Scenario.Get<Grammar.Emitter.Dot.Model.Graph>("graph");
+            var x = graph.Render();
             Console.WriteLine(x);
         }
 
@@ -38,7 +38,7 @@ namespace Mobilize.Grammar.Test.Emitter
             var graph = Emit.Graph("mygraph")
                 .AddStatement(Emit.AttributeStatement(AttributeKind.Graph).Property("color", "red"))
                 .AddStatement(Emit.AttributeStatement(AttributeKind.Edge));
-            this.Scenario["graph"] = graph;
+            Scenario["graph"] = graph;
         }
 
         private void Render()

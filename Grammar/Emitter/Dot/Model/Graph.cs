@@ -11,8 +11,8 @@ namespace Mobilize.Grammar.Emitter.Dot.Model
 
     public class Graph : Writer
     {
-        private readonly List<Statement> statements;
         private readonly GraphKind kind;
+        private readonly List<Statement> statements;
 
         public Graph(GraphKind kind, string id, bool strict = false)
         {
@@ -21,8 +21,8 @@ namespace Mobilize.Grammar.Emitter.Dot.Model
             statements = new List<Statement>();
         }
 
-        public IEnumerable<Statement> Statements => this.statements;
-        
+        public IEnumerable<Statement> Statements => statements;
+
         public string GraphType { get; }
 
         public string Identifier { get; }
@@ -41,7 +41,7 @@ namespace Mobilize.Grammar.Emitter.Dot.Model
 
         public string Render()
         {
-          return  Template
+            return Template
                 .Bind("graph")
                 .Bind("it", this)
                 .Render();

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Mobilize.Grammar.Emitter.Dot.Model
 {
@@ -14,27 +13,24 @@ namespace Mobilize.Grammar.Emitter.Dot.Model
     public class AttributeStatement : Statement
     {
         private readonly List<Property> properties;
-        
-        private AttributeKind kind;
+
+        private readonly AttributeKind kind;
 
         public AttributeStatement(AttributeKind kind)
         {
             this.kind = kind;
             properties = new List<Property>();
-        
         }
+
+        public string KindName => Enum.GetName(typeof(AttributeKind), kind);
+
+        public IEnumerable<Property> Properties => properties;
+
+        public bool HasProperties => properties.Count > 0;
 
         public void AddProperty(Property property)
         {
             properties.Add(property);
         }
-
-
-        public string KindName => Enum.GetName(typeof(AttributeKind), this.kind);
-
-        public IEnumerable<Property> Properties => this.properties;
-
-        public bool HasProperties => this.properties.Count > 0;
-
     }
 }
