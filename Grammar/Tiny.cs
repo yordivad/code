@@ -5,12 +5,14 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Linq;
-using Antlr4.Runtime;
-using Mobilize.Grammar.Language;
-
 namespace Mobilize.Grammar
 {
+    using System.Linq;
+
+    using Antlr4.Runtime;
+
+    using Mobilize.Grammar.Language;
+
     /// <summary>
     ///     Class Tiny.
     /// </summary>
@@ -26,14 +28,14 @@ namespace Mobilize.Grammar
         /// </summary>
         public Tiny()
         {
-            errors = new TinyErrors();
+            this.errors = new TinyErrors();
         }
 
         /// <summary>
         ///     Gets a value indicating whether this instance has errors.
         /// </summary>
         /// <value><c>true</c> if this instance has errors; otherwise, <c>false</c>.</value>
-        public bool HasErrors => errors.Errors.Any();
+        public bool HasErrors => this.errors.Errors.Any();
 
         /// <summary>
         ///     Trees the specified code.
@@ -44,10 +46,10 @@ namespace Mobilize.Grammar
         {
             var stream = new AntlrInputStream(code);
             var lexer = new TinyLexer(stream);
-            lexer.AddErrorListener(errors);
+            lexer.AddErrorListener(this.errors);
             var token = new CommonTokenStream(lexer);
             var parser = new TinyParser(token);
-            parser.AddErrorListener(errors);
+            parser.AddErrorListener(this.errors);
             return parser.unit();
         }
     }

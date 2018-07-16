@@ -5,14 +5,16 @@
 // <summary></summary>
 // ***********************************************************************
 
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mobilize.Grammar.Graph.Generic;
-using Mobilize.Quality.Core;
-using Mobilize.Quality.Core.Annotations;
-
 namespace Mobilize.Grammar.Test.Graph
 {
+    using FluentAssertions;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Mobilize.Grammar.Graph;
+    using Mobilize.Quality.Core;
+    using Mobilize.Quality.Core.Annotations;
+
     /// <summary>
     ///     Class EdgesFeature.
     /// </summary>
@@ -28,25 +30,25 @@ namespace Mobilize.Grammar.Test.Graph
         [TestMethod]
         public void Unique()
         {
-            RunScenario(
-                given => FirstEdge(),
-                and => EqualEdge(),
-                when => Compare(),
-                then => CompareShouldBe(true),
-                and => CompareHashCode(),
-                then => CompareShouldBe(true),
-                and => CompareTheSameEdge(),
-                then => CompareShouldBe(true),
-                and => CompareIfItIsNotEqual(),
-                then => CompareShouldBe(false),
-                and => CompareWithNull(),
-                then => CompareShouldBe(false),
-                and => CompareWithObject(),
-                then => CompareShouldBe(true),
-                and => CompareWithSameObject(),
-                then => CompareShouldBe(true),
-                and => CompareWithObjectNull(),
-                then => CompareShouldBe(false));
+            this.RunScenario(
+                given => this.FirstEdge(),
+                and => this.EqualEdge(),
+                when => this.Compare(),
+                then => this.CompareShouldBe(true),
+                and => this.CompareHashCode(),
+                then => this.CompareShouldBe(true),
+                and => this.CompareTheSameEdge(),
+                then => this.CompareShouldBe(true),
+                and => this.CompareIfItIsNotEqual(),
+                then => this.CompareShouldBe(false),
+                and => this.CompareWithNull(),
+                then => this.CompareShouldBe(false),
+                and => this.CompareWithObject(),
+                then => this.CompareShouldBe(true),
+                and => this.CompareWithSameObject(),
+                then => this.CompareShouldBe(true),
+                and => this.CompareWithObjectNull(),
+                then => this.CompareShouldBe(false));
         }
 
         /// <summary>
@@ -54,9 +56,9 @@ namespace Mobilize.Grammar.Test.Graph
         /// </summary>
         private void Compare()
         {
-            var edge1 = Scenario.Get<Edge<int>>("edge1");
-            var edge2 = Scenario.Get<Edge<int>>("edge2");
-            Scenario["compare"] = edge1 == edge2;
+            var edge1 = this.Scenario.Get<Edge<int>>("edge1");
+            var edge2 = this.Scenario.Get<Edge<int>>("edge2");
+            this.Scenario["compare"] = edge1 == edge2;
         }
 
         /// <summary>
@@ -64,10 +66,10 @@ namespace Mobilize.Grammar.Test.Graph
         /// </summary>
         private void CompareHashCode()
         {
-            var edge1 = Scenario.Get<Edge<int>>("edge1");
-            var edge2 = Scenario.Get<Edge<int>>("edge2");
+            var edge1 = this.Scenario.Get<Edge<int>>("edge1");
+            var edge2 = this.Scenario.Get<Edge<int>>("edge2");
 
-            Scenario["compare"] = edge1.GetHashCode() == edge2.GetHashCode();
+            this.Scenario["compare"] = edge1.GetHashCode() == edge2.GetHashCode();
         }
 
         /// <summary>
@@ -75,10 +77,10 @@ namespace Mobilize.Grammar.Test.Graph
         /// </summary>
         private void CompareIfItIsNotEqual()
         {
-            var edge1 = Scenario.Get<Edge<int>>("edge1");
-            var edge2 = Scenario.Get<Edge<int>>("edge1");
+            var edge1 = this.Scenario.Get<Edge<int>>("edge1");
+            var edge2 = this.Scenario.Get<Edge<int>>("edge1");
 
-            Scenario["compare"] = edge1 != edge2;
+            this.Scenario["compare"] = edge1 != edge2;
         }
 
         /// <summary>
@@ -87,7 +89,7 @@ namespace Mobilize.Grammar.Test.Graph
         /// <param name="expected">if set to <c>true</c> [expected].</param>
         private void CompareShouldBe(bool expected)
         {
-            var response = Scenario.Get<bool>("compare");
+            var response = this.Scenario.Get<bool>("compare");
             response.Should().Be(expected);
         }
 
@@ -96,10 +98,10 @@ namespace Mobilize.Grammar.Test.Graph
         /// </summary>
         private void CompareTheSameEdge()
         {
-            var edge1 = Scenario.Get<Edge<int>>("edge1");
-            var edge2 = Scenario.Get<Edge<int>>("edge1");
+            var edge1 = this.Scenario.Get<Edge<int>>("edge1");
+            var edge2 = this.Scenario.Get<Edge<int>>("edge1");
 
-            Scenario["compare"] = edge1 == edge2;
+            this.Scenario["compare"] = edge1 == edge2;
         }
 
         /// <summary>
@@ -107,8 +109,8 @@ namespace Mobilize.Grammar.Test.Graph
         /// </summary>
         private void CompareWithNull()
         {
-            var edge = Scenario.Get<Edge<int>>("edge1");
-            Scenario["compare"] = edge.Equals(null);
+            var edge = this.Scenario.Get<Edge<int>>("edge1");
+            this.Scenario["compare"] = edge.Equals(null);
         }
 
         /// <summary>
@@ -116,9 +118,9 @@ namespace Mobilize.Grammar.Test.Graph
         /// </summary>
         private void CompareWithObject()
         {
-            var edge1 = Scenario.Get<Edge<int>>("edge1");
-            var edge2 = Scenario.Get<Edge<int>>("edge2");
-            Scenario["compare"] = edge1.Equals((object) edge2);
+            var edge1 = this.Scenario.Get<Edge<int>>("edge1");
+            var edge2 = this.Scenario.Get<Edge<int>>("edge2");
+            this.Scenario["compare"] = edge1.Equals((object)edge2);
         }
 
         /// <summary>
@@ -126,8 +128,8 @@ namespace Mobilize.Grammar.Test.Graph
         /// </summary>
         private void CompareWithObjectNull()
         {
-            var edge = Scenario.Get<Edge<int>>("edge1");
-            Scenario["compare"] = edge.Equals((object) null);
+            var edge = this.Scenario.Get<Edge<int>>("edge1");
+            this.Scenario["compare"] = edge.Equals((object)null);
         }
 
         /// <summary>
@@ -135,8 +137,8 @@ namespace Mobilize.Grammar.Test.Graph
         /// </summary>
         private void CompareWithSameObject()
         {
-            var edge = Scenario.Get<Edge<int>>("edge1");
-            Scenario["compare"] = edge.Equals((object) edge);
+            var edge = this.Scenario.Get<Edge<int>>("edge1");
+            this.Scenario["compare"] = edge.Equals((object)edge);
         }
 
         /// <summary>
@@ -144,7 +146,7 @@ namespace Mobilize.Grammar.Test.Graph
         /// </summary>
         private void EqualEdge()
         {
-            Scenario["edge2"] = new Edge<int>(1, 2);
+            this.Scenario["edge2"] = new Edge<int>(1, 2);
         }
 
         /// <summary>
@@ -152,7 +154,7 @@ namespace Mobilize.Grammar.Test.Graph
         /// </summary>
         private void FirstEdge()
         {
-            Scenario["edge1"] = new Edge<int>(1, 2);
+            this.Scenario["edge1"] = new Edge<int>(1, 2);
         }
     }
 }

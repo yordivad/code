@@ -5,12 +5,13 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
-using System.IO;
-using Antlr4.Runtime;
-
 namespace Mobilize.Grammar
 {
+    using System.Collections.Generic;
+    using System.IO;
+
+    using Antlr4.Runtime;
+
     /// <summary>
     ///     Class TinyErrors.
     /// </summary>
@@ -27,14 +28,14 @@ namespace Mobilize.Grammar
         /// </summary>
         public TinyErrors()
         {
-            errors = new List<Error>();
+            this.errors = new List<Error>();
         }
 
         /// <summary>
         ///     Gets the errors.
         /// </summary>
         /// <value>The errors.</value>
-        public IEnumerable<Error> Errors => errors;
+        public IEnumerable<Error> Errors => this.errors;
 
         public void SyntaxError(
             TextWriter output,
@@ -45,14 +46,14 @@ namespace Mobilize.Grammar
             string msg,
             RecognitionException e)
         {
-            errors.Add(
+            this.errors.Add(
                 new Error
-                {
-                    CharLine = charPositionInLine,
-                    Line = line,
-                    Message = msg,
-                    Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
-                });
+                    {
+                        CharLine = charPositionInLine,
+                        Line = line,
+                        Message = msg,
+                        Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
+                    });
         }
 
         /// <summary>
@@ -104,14 +105,14 @@ namespace Mobilize.Grammar
             string msg,
             RecognitionException e)
         {
-            errors.Add(
+            this.errors.Add(
                 new Error
-                {
-                    CharLine = charPositionInLine,
-                    Line = line,
-                    Message = msg,
-                    Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
-                });
+                    {
+                        CharLine = charPositionInLine,
+                        Line = line,
+                        Message = msg,
+                        Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
+                    });
         }
     }
 }

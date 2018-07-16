@@ -5,12 +5,11 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Collections.Generic;
-using Mobilize.Grammar.Graph.Generic;
-
 namespace Mobilize.Grammar.Graph
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
     ///     Interface IGraph
     /// </summary>

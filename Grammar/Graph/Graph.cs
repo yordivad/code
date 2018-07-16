@@ -5,15 +5,16 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Deedle;
-using Mobilize.Grammar.Graph.Generic;
-using MoreLinq;
-
 namespace Mobilize.Grammar.Graph
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Deedle;
+
+    using MoreLinq;
+
     /// <summary>
     ///     Class Graph.
     /// </summary>
@@ -37,21 +38,21 @@ namespace Mobilize.Grammar.Graph
         /// </summary>
         public Graph()
         {
-            edges = new HashSet<Edge<TVertex>>();
-            vertex = new HashSet<TVertex>();
+            this.edges = new HashSet<Edge<TVertex>>();
+            this.vertex = new HashSet<TVertex>();
         }
 
         /// <summary>
         ///     Gets the edges.
         /// </summary>
         /// <value>The edges.</value>
-        public IEnumerable<Edge<TVertex>> Edges => edges;
+        public IEnumerable<Edge<TVertex>> Edges => this.edges;
 
         /// <summary>
         ///     Gets the vertex.
         /// </summary>
         /// <value>The vertice.</value>
-        public IEnumerable<TVertex> Vertex => vertex;
+        public IEnumerable<TVertex> Vertex => this.vertex;
 
         /// <summary>
         ///     Adds the edge.
@@ -59,16 +60,7 @@ namespace Mobilize.Grammar.Graph
         /// <param name="edge">The edge.</param>
         public void AddEdge(Edge<TVertex> edge)
         {
-            edges.Add(edge);
-        }
-
-        /// <summary>
-        ///     Adds the vertice.
-        /// </summary>
-        /// <param name="vertice">The vertice.</param>
-        public void AddVertex(TVertex vertice)
-        {
-            vertex.Add(vertice);
+            this.edges.Add(edge);
         }
 
         /// <summary>
@@ -78,7 +70,16 @@ namespace Mobilize.Grammar.Graph
         /// <param name="out">The out.</param>
         public void AddEdge(TVertex @in, TVertex @out)
         {
-            AddEdge(new Edge<TVertex>(@in, @out));
+            this.AddEdge(new Edge<TVertex>(@in, @out));
+        }
+
+        /// <summary>
+        ///     Adds the vertice.
+        /// </summary>
+        /// <param name="vertice">The vertice.</param>
+        public void AddVertex(TVertex vertice)
+        {
+            this.vertex.Add(vertice);
         }
 
         /// <summary>
@@ -87,7 +88,7 @@ namespace Mobilize.Grammar.Graph
         /// <returns>IEnumerable&lt;IDictionary&lt;TVertex, IEnumerable&lt;TVertex&gt;&gt;&gt;.</returns>
         public IDictionary<TVertex, IEnumerable<TVertex>> AdjacencyDictionary()
         {
-            return vertex.Select(v => new KeyValuePair<TVertex, IEnumerable<TVertex>>(v, Neighbors(v)))
+            return this.vertex.Select(v => new KeyValuePair<TVertex, IEnumerable<TVertex>>(v, this.Neighbors(v)))
                 .ToDictionary();
         }
 
@@ -98,9 +99,9 @@ namespace Mobilize.Grammar.Graph
         public Frame<TVertex, TVertex> AdjacencyTable()
         {
             return Frame.FromValues(
-                vertex.SelectMany(
-                    row => vertex.Select(
-                        column => Tuple.Create(row, column, IsConnected(row, column) ? 1 : 0))));
+                this.vertex.SelectMany(
+                    row => this.vertex.Select(
+                        column => Tuple.Create(row, column, this.IsConnected(row, column) ? 1 : 0))));
         }
 
         /// <summary>
@@ -110,7 +111,8 @@ namespace Mobilize.Grammar.Graph
         /// <returns>The degree of the vertice</returns>
         public int Degree(TVertex vertice)
         {
-            return edges.Count(c => c.Endpoints.In.Is(vertice)) + edges.Count(c => c.Endpoints.Out.Is(vertice));
+            return this.edges.Count(c => c.Endpoints.In.Is(vertice))
+                   + this.edges.Count(c => c.Endpoints.Out.Is(vertice));
         }
 
         /// <summary>
@@ -120,7 +122,7 @@ namespace Mobilize.Grammar.Graph
         /// <returns>The List of in vertex;.</returns>
         public IEnumerable<TVertex> InVertex(TVertex vertice)
         {
-            return edges.Where(v => v.Endpoints.In.Is(vertice)).Select(c => c.Endpoints.Out);
+            return this.edges.Where(v => v.Endpoints.In.Is(vertice)).Select(c => c.Endpoints.Out);
         }
 
         /// <summary>
@@ -131,7 +133,7 @@ namespace Mobilize.Grammar.Graph
         /// <returns>Determine if two vertex are connected.</returns>
         public bool IsConnected(TVertex vertex1, TVertex vertex2)
         {
-            return Edges.Any(e => e.Is(vertex1, vertex2) || e.Is(vertex2, vertex1));
+            return this.Edges.Any(e => e.Is(vertex1, vertex2) || e.Is(vertex2, vertex1));
         }
 
         /// <summary>
@@ -140,7 +142,7 @@ namespace Mobilize.Grammar.Graph
         /// <returns><c>true</c> if this instance is even; otherwise, <c>false</c>.</returns>
         public bool IsEven()
         {
-            return vertex.Sum(Degree) % 2 == 0;
+            return this.vertex.Sum(this.Degree) % 2 == 0;
         }
 
         /// <summary>
@@ -150,7 +152,7 @@ namespace Mobilize.Grammar.Graph
         /// <returns>the List of the neighbors.</returns>
         public IEnumerable<TVertex> Neighbors(TVertex vertice)
         {
-            return InVertex(vertice).Union(OutVertex(vertice)).Distinct();
+            return this.InVertex(vertice).Union(this.OutVertex(vertice)).Distinct();
         }
 
         /// <summary>
@@ -160,7 +162,7 @@ namespace Mobilize.Grammar.Graph
         /// <returns>The list of out vertex.</returns>
         public IEnumerable<TVertex> OutVertex(TVertex vertice)
         {
-            return edges.Where(v => v.Endpoints.Out.Is(vertice)).Select(c => c.Endpoints.In);
+            return this.edges.Where(v => v.Endpoints.Out.Is(vertice)).Select(c => c.Endpoints.In);
         }
 
         /// <summary>
@@ -173,7 +175,7 @@ namespace Mobilize.Grammar.Graph
             var visited = new HashSet<Edge<TVertex>>();
             var path = new HashSet<Edge<TVertex>>();
 
-            var edge = Next(vertex, visited);
+            var edge = this.Next(vertex, visited);
             while (edge != null)
             {
                 if (!visited.Contains(edge))
@@ -183,7 +185,7 @@ namespace Mobilize.Grammar.Graph
                     vertex = edge.Endpoints.Out;
                 }
 
-                edge = Next(vertex, visited);
+                edge = this.Next(vertex, visited);
             }
 
             return path;
@@ -197,7 +199,7 @@ namespace Mobilize.Grammar.Graph
         /// <returns>Some edges</returns>
         private Edge<TVertex> Next(TVertex vertex, ISet<Edge<TVertex>> visited)
         {
-            return edges.FirstOrDefault(c => c.Endpoints.In.Is(vertex) && visited.All(e => e != c));
+            return this.edges.FirstOrDefault(c => c.Endpoints.In.Is(vertex) && visited.All(e => e != c));
         }
     }
 }

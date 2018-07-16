@@ -5,10 +5,10 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
-
 namespace Mobilize.Grammar.Graph
 {
+    using System.Collections.Generic;
+
     /// <summary>
     ///     Class GraphExtension.
     /// </summary>

@@ -5,14 +5,16 @@
 // <summary></summary>
 // ***********************************************************************
 
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mobilize.Quality.Core;
-using Mobilize.Quality.Core.Annotations;
-using Mobilize.Quality.Core.Embedded;
-
 namespace Mobilize.Grammar.Test
 {
+    using FluentAssertions;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Mobilize.Quality.Core;
+    using Mobilize.Quality.Core.Annotations;
+    using Mobilize.Quality.Core.Embedded;
+
     /// <summary>
     ///     Class TinyGrammar.
     /// </summary>
@@ -28,7 +30,7 @@ namespace Mobilize.Grammar.Test
         [Scenario("Parsing the program")]
         public void ParseProgram()
         {
-            RunScenario(given => LoadProgram(), when => ParseTheProgram(), then => ParserWorks());
+            this.RunScenario(given => this.LoadProgram(), when => this.ParseTheProgram(), then => this.ParserWorks());
         }
 
         /// <summary>
@@ -36,7 +38,7 @@ namespace Mobilize.Grammar.Test
         /// </summary>
         private void LoadProgram()
         {
-            Scenario["program"] = Content.ReadEmbeddedFile("iter.tiny");
+            this.Scenario["program"] = Content.ReadEmbeddedFile("iter.tiny");
         }
 
         /// <summary>
@@ -44,7 +46,7 @@ namespace Mobilize.Grammar.Test
         /// </summary>
         private void ParserWorks()
         {
-            var parser = Scenario.Get<Tiny>("parser");
+            var parser = this.Scenario.Get<Tiny>("parser");
             parser.HasErrors.Should().BeFalse();
         }
 
@@ -54,8 +56,8 @@ namespace Mobilize.Grammar.Test
         private void ParseTheProgram()
         {
             var parser = new Tiny();
-            Scenario["parser"] = parser;
-            var tree = parser.Tree(Scenario.Get<string>("program"));
+            this.Scenario["parser"] = parser;
+            var tree = parser.Tree(this.Scenario.Get<string>("program"));
         }
     }
 }

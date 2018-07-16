@@ -5,11 +5,11 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Collections.Generic;
-
-namespace Mobilize.Grammar.Graph.Generic
+namespace Mobilize.Grammar.Graph
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
     ///     Interface IEdge
     /// </summary>
@@ -26,7 +26,7 @@ namespace Mobilize.Grammar.Graph.Generic
         /// <param name="item2">The item2.</param>
         public Edge(T item1, T item2)
         {
-            Endpoints = (item1, item2);
+            this.Endpoints = (item1, item2);
         }
 
         /// <summary>
@@ -34,21 +34,6 @@ namespace Mobilize.Grammar.Graph.Generic
         /// </summary>
         /// <value>The endpoints.</value>
         public (T In, T Out) Endpoints { get; }
-
-        /// <summary>
-        ///     Indicates whether the current object is equal to another object of the same type.
-        /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
-        /// <returns>
-        ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise,
-        ///     false.
-        /// </returns>
-        public bool Equals(Edge<T> other)
-        {
-            if (other is null) return false;
-
-            return ReferenceEquals(this, other) || Unique(other);
-        }
 
         /// <summary>
         ///     Implements the == operator.
@@ -73,6 +58,21 @@ namespace Mobilize.Grammar.Graph.Generic
         }
 
         /// <summary>
+        ///     Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise,
+        ///     false.
+        /// </returns>
+        public bool Equals(Edge<T> other)
+        {
+            if (other is null) return false;
+
+            return ReferenceEquals(this, other) || this.Unique(other);
+        }
+
+        /// <summary>
         ///     Determines whether the specified <see cref="object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
@@ -83,7 +83,7 @@ namespace Mobilize.Grammar.Graph.Generic
 
             if (ReferenceEquals(this, obj)) return true;
 
-            return obj.GetType() == GetType() && Equals((Edge<T>) obj);
+            return obj.GetType() == this.GetType() && this.Equals((Edge<T>)obj);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Mobilize.Grammar.Graph.Generic
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         public override int GetHashCode()
         {
-            return (Endpoints.In.GetHashCode() * 397) ^ Endpoints.Out.GetHashCode();
+            return (this.Endpoints.In.GetHashCode() * 397) ^ this.Endpoints.Out.GetHashCode();
         }
 
         /// <summary>
@@ -102,8 +102,8 @@ namespace Mobilize.Grammar.Graph.Generic
         /// <returns><c>true</c> if it is equal, <c>false</c> otherwise.</returns>
         private bool Unique(Edge<T> other)
         {
-            return EqualityComparer<T>.Default.Equals(Endpoints.In, other.Endpoints.In)
-                   && EqualityComparer<T>.Default.Equals(Endpoints.Out, other.Endpoints.Out);
+            return EqualityComparer<T>.Default.Equals(this.Endpoints.In, other.Endpoints.In)
+                   && EqualityComparer<T>.Default.Equals(this.Endpoints.Out, other.Endpoints.Out);
         }
     }
 }

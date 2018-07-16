@@ -5,19 +5,24 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Deedle;
-using DeepEqual.Syntax;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mobilize.Grammar.Graph;
-using Mobilize.Quality.Core;
-using Mobilize.Quality.Core.Annotations;
-
 namespace Mobilize.Grammar.Test.Graph
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Deedle;
+
+    using DeepEqual.Syntax;
+
+    using FluentAssertions;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Mobilize.Grammar.Graph;
+    using Mobilize.Quality.Core;
+    using Mobilize.Quality.Core.Annotations;
+
     /// <summary>
     ///     Class GraphFeature.
     /// </summary>
@@ -33,21 +38,21 @@ namespace Mobilize.Grammar.Test.Graph
         [TestMethod]
         public void AdjacencyDictionary()
         {
-            RunScenario(
-                given => CreateGraph<int>(),
-                and => AddVertexToGraph(1),
-                and => AddVertexToGraph(2),
-                and => AddVertexToGraph(3),
-                and => AddEdgeToGraph(1, 1),
-                and => AddEdgeToGraph(1, 2),
-                when => GetAdjacencyDictionary<int>(),
-                then => VerifyDictionary(
+            this.RunScenario(
+                given => this.CreateGraph<int>(),
+                and => this.AddVertexToGraph(1),
+                and => this.AddVertexToGraph(2),
+                and => this.AddVertexToGraph(3),
+                and => this.AddEdgeToGraph(1, 1),
+                and => this.AddEdgeToGraph(1, 2),
+                when => this.GetAdjacencyDictionary<int>(),
+                then => this.VerifyDictionary(
                     new Dictionary<int, IEnumerable<int>>
-                    {
-                        {1, new List<int> {1, 2}},
-                        {2, new List<int> {1}},
-                        {3, new List<int>()}
-                    }));
+                        {
+                            { 1, new List<int> { 1, 2 } },
+                            { 2, new List<int> { 1 } },
+                            { 3, new List<int>() }
+                        }));
         }
 
         /// <summary>
@@ -57,51 +62,24 @@ namespace Mobilize.Grammar.Test.Graph
         [TestMethod]
         public void AdjecencyTable()
         {
-            RunScenario(
-                given => CreateGraph<int>(),
-                and => AddVertexToGraph(1),
-                and => AddVertexToGraph(2),
-                and => AddVertexToGraph(3),
-                and => AddEdgeToGraph(1, 1),
-                and => AddEdgeToGraph(1, 2),
-                when => GetAdjacencyTable<int>(),
-                then => TableAsExpected(1, 1, 1),
-                and => TableAsExpected(1, 2, 1),
-                and => TableAsExpected(1, 3, 0),
-                and => TableAsExpected(2, 1, 1),
-                and => TableAsExpected(2, 2, 0),
-                and => TableAsExpected(2, 3, 0),
-                and => TableAsExpected(3, 1, 0),
-                and => TableAsExpected(3, 3, 0),
-                and => TableAsExpected(3, 3, 0));
+            this.RunScenario(
+                given => this.CreateGraph<int>(),
+                and => this.AddVertexToGraph(1),
+                and => this.AddVertexToGraph(2),
+                and => this.AddVertexToGraph(3),
+                and => this.AddEdgeToGraph(1, 1),
+                and => this.AddEdgeToGraph(1, 2),
+                when => this.GetAdjacencyTable<int>(),
+                then => this.TableAsExpected(1, 1, 1),
+                and => this.TableAsExpected(1, 2, 1),
+                and => this.TableAsExpected(1, 3, 0),
+                and => this.TableAsExpected(2, 1, 1),
+                and => this.TableAsExpected(2, 2, 0),
+                and => this.TableAsExpected(2, 3, 0),
+                and => this.TableAsExpected(3, 1, 0),
+                and => this.TableAsExpected(3, 3, 0),
+                and => this.TableAsExpected(3, 3, 0));
         }
-
-        [Scenario("Tracing")]
-        [TestMethod]
-        public void Trace()
-        {
-            RunScenario(
-                given => CreateGraph<int>(),
-                and => AddVertexToGraph(1),
-                and => AddVertexToGraph(2),
-                and => AddVertexToGraph(3),
-                and => AddVertexToGraph(4),
-                and => AddVertexToGraph(5),
-                and => AddEdgeToGraph(1, 1),
-                and => AddEdgeToGraph(1, 2),
-                and => AddEdgeToGraph(1, 4),
-                and => AddEdgeToGraph(2, 5),
-                and => AddEdgeToGraph(5, 2),
-                when => TraceGraph(1));
-        }
-
-        private void TraceGraph<T>(T vertex)
-            where T : IComparable
-        {
-            var graph = Scenario.Get<Graph<T>>("graph");
-            var trace = graph.Trace(vertex);
-        }
-
 
         /// <summary>
         ///     Generics the graph.
@@ -110,13 +88,13 @@ namespace Mobilize.Grammar.Test.Graph
         [TestMethod]
         public void EdgeGraphIsASet()
         {
-            RunScenario(
-                given => CreateGraph<int>(),
-                when => AddEdgeToGraph(1, 1),
-                and => AddEdgeToGraph(1, 1),
-                then => EdgeLengthIs<int>(1),
-                and => AddEdgeToGraph(1, 2),
-                then => EdgeLengthIs<int>(2));
+            this.RunScenario(
+                given => this.CreateGraph<int>(),
+                when => this.AddEdgeToGraph(1, 1),
+                and => this.AddEdgeToGraph(1, 1),
+                then => this.EdgeLengthIs<int>(1),
+                and => this.AddEdgeToGraph(1, 2),
+                then => this.EdgeLengthIs<int>(2));
         }
 
         /// <summary>
@@ -126,14 +104,33 @@ namespace Mobilize.Grammar.Test.Graph
         [TestMethod]
         public void GraphIsEven()
         {
-            RunScenario(
-                given => CreateGraph<int>(),
-                and => AddVertexToGraph(1),
-                and => AddVertexToGraph(2),
-                and => AddVertexToGraph(3),
-                and => AddEdgeToGraph(1, 1),
-                and => AddEdgeToGraph(1, 2),
-                then => IsGraphEven<int>(true));
+            this.RunScenario(
+                given => this.CreateGraph<int>(),
+                and => this.AddVertexToGraph(1),
+                and => this.AddVertexToGraph(2),
+                and => this.AddVertexToGraph(3),
+                and => this.AddEdgeToGraph(1, 1),
+                and => this.AddEdgeToGraph(1, 2),
+                then => this.IsGraphEven<int>(true));
+        }
+
+        [Scenario("Tracing")]
+        [TestMethod]
+        public void Trace()
+        {
+            this.RunScenario(
+                given => this.CreateGraph<int>(),
+                and => this.AddVertexToGraph(1),
+                and => this.AddVertexToGraph(2),
+                and => this.AddVertexToGraph(3),
+                and => this.AddVertexToGraph(4),
+                and => this.AddVertexToGraph(5),
+                and => this.AddEdgeToGraph(1, 1),
+                and => this.AddEdgeToGraph(1, 2),
+                and => this.AddEdgeToGraph(1, 4),
+                and => this.AddEdgeToGraph(2, 5),
+                and => this.AddEdgeToGraph(5, 2),
+                when => this.TraceGraph(1));
         }
 
         /// <summary>
@@ -143,16 +140,16 @@ namespace Mobilize.Grammar.Test.Graph
         [TestMethod]
         public void VertexDegree()
         {
-            RunScenario(
-                given => CreateGraph<int>(),
-                and => AddVertexToGraph(1),
-                and => AddVertexToGraph(2),
-                and => AddVertexToGraph(3),
-                and => AddEdgeToGraph(1, 1),
-                and => AddEdgeToGraph(1, 2),
-                then => DegreeOf(1, 3),
-                and => DegreeOf(2, 1),
-                and => DegreeOf(3, 0));
+            this.RunScenario(
+                given => this.CreateGraph<int>(),
+                and => this.AddVertexToGraph(1),
+                and => this.AddVertexToGraph(2),
+                and => this.AddVertexToGraph(3),
+                and => this.AddEdgeToGraph(1, 1),
+                and => this.AddEdgeToGraph(1, 2),
+                then => this.DegreeOf(1, 3),
+                and => this.DegreeOf(2, 1),
+                and => this.DegreeOf(3, 0));
         }
 
         /// <summary>
@@ -162,13 +159,13 @@ namespace Mobilize.Grammar.Test.Graph
         [TestMethod]
         public void VertexGraphIsASet()
         {
-            RunScenario(
-                given => CreateGraph<int>(),
-                when => AddVertexToGraph(1),
-                and => AddVertexToGraph(1),
-                then => VertexLengthIs<int>(1),
-                and => AddVertexToGraph(2),
-                then => VertexLengthIs<int>(2));
+            this.RunScenario(
+                given => this.CreateGraph<int>(),
+                when => this.AddVertexToGraph(1),
+                and => this.AddVertexToGraph(1),
+                then => this.VertexLengthIs<int>(1),
+                and => this.AddVertexToGraph(2),
+                then => this.VertexLengthIs<int>(2));
         }
 
         /// <summary>
@@ -180,7 +177,7 @@ namespace Mobilize.Grammar.Test.Graph
         private void AddEdgeToGraph<T>(T endpoint1, T endpoint2)
             where T : IComparable
         {
-            var graph = Scenario.Get<Graph<T>>("graph");
+            var graph = this.Scenario.Get<Graph<T>>("graph");
             graph.AddEdge(endpoint1, endpoint2);
         }
 
@@ -192,7 +189,7 @@ namespace Mobilize.Grammar.Test.Graph
         private void AddVertexToGraph<T>(T value)
             where T : IComparable
         {
-            var graph = Scenario.Get<Graph<T>>("graph");
+            var graph = this.Scenario.Get<Graph<T>>("graph");
             graph.AddVertex(value);
         }
 
@@ -203,7 +200,7 @@ namespace Mobilize.Grammar.Test.Graph
         private void CreateGraph<T>()
             where T : IComparable
         {
-            Scenario["graph"] = new Graph<T>();
+            this.Scenario["graph"] = new Graph<T>();
         }
 
         /// <summary>
@@ -215,7 +212,7 @@ namespace Mobilize.Grammar.Test.Graph
         private void DegreeOf<T>(T vertice, int expected)
             where T : IComparable
         {
-            var graph = Scenario.Get<Graph<T>>("graph");
+            var graph = this.Scenario.Get<Graph<T>>("graph");
             graph.Degree(vertice).Should().Be(expected);
         }
 
@@ -227,7 +224,7 @@ namespace Mobilize.Grammar.Test.Graph
         private void EdgeLengthIs<T>(int expected)
             where T : IComparable
         {
-            var graph = Scenario.Get<Graph<T>>("graph");
+            var graph = this.Scenario.Get<Graph<T>>("graph");
             graph.Edges.Count().Should().Be(expected);
         }
 
@@ -238,8 +235,8 @@ namespace Mobilize.Grammar.Test.Graph
         private void GetAdjacencyDictionary<T>()
             where T : IComparable
         {
-            var graph = Scenario.Get<Graph<T>>("graph");
-            Scenario["dictionary"] = graph.AdjacencyDictionary();
+            var graph = this.Scenario.Get<Graph<T>>("graph");
+            this.Scenario["dictionary"] = graph.AdjacencyDictionary();
         }
 
         /// <summary>
@@ -249,8 +246,8 @@ namespace Mobilize.Grammar.Test.Graph
         private void GetAdjacencyTable<T>()
             where T : IComparable
         {
-            var graph = Scenario.Get<Graph<T>>("graph");
-            Scenario["table"] = graph.AdjacencyTable();
+            var graph = this.Scenario.Get<Graph<T>>("graph");
+            this.Scenario["table"] = graph.AdjacencyTable();
         }
 
         /// <summary>
@@ -261,7 +258,7 @@ namespace Mobilize.Grammar.Test.Graph
         private void IsGraphEven<T>(bool expected)
             where T : IComparable
         {
-            var graph = Scenario.Get<Graph<T>>("graph");
+            var graph = this.Scenario.Get<Graph<T>>("graph");
             graph.IsEven().Should().Be(expected);
         }
 
@@ -274,8 +271,15 @@ namespace Mobilize.Grammar.Test.Graph
         /// <param name="value">The value.</param>
         private void TableAsExpected<T>(T row, T column, int value)
         {
-            var table = Scenario.Get<Frame<T, T>>("table");
+            var table = this.Scenario.Get<Frame<T, T>>("table");
             table[row, column].Should().Be(value);
+        }
+
+        private void TraceGraph<T>(T vertex)
+            where T : IComparable
+        {
+            var graph = this.Scenario.Get<Graph<T>>("graph");
+            var trace = graph.Trace(vertex);
         }
 
         /// <summary>
@@ -285,7 +289,7 @@ namespace Mobilize.Grammar.Test.Graph
         /// <param name="expected">The expected.</param>
         private void VerifyDictionary<T>(Dictionary<T, IEnumerable<T>> expected)
         {
-            var dictionary = Scenario.Get<Dictionary<int, IEnumerable<int>>>("dictionary");
+            var dictionary = this.Scenario.Get<Dictionary<int, IEnumerable<int>>>("dictionary");
 
             dictionary.ShouldDeepEqual(expected);
         }
@@ -298,7 +302,7 @@ namespace Mobilize.Grammar.Test.Graph
         private void VertexLengthIs<T>(int expected)
             where T : IComparable
         {
-            var graph = Scenario.Get<Graph<T>>("graph");
+            var graph = this.Scenario.Get<Graph<T>>("graph");
             graph.Vertex.Count().Should().Be(expected);
         }
     }
