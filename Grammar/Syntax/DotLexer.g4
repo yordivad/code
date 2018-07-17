@@ -46,7 +46,7 @@ COLON:              ':';
 // Operators
 ASSIGN:             '=';
 ARROW:              '->';
-OPTION:             '--';
+DDASH:             '--';
 
 NUMBER
    : '-'? ( '.' DIGIT+ | DIGIT+ ( '.' DIGIT* )? )

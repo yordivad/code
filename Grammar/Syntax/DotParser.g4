@@ -43,7 +43,7 @@ edgeRHS
 
 edge_operation
    : ARROW 
-   | OPTION
+   | DDASH
    ;
 
 node_statement

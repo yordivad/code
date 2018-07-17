@@ -114,6 +114,9 @@ namespace Mobilize.Grammar.Test.Graph
                 then => this.IsGraphEven<int>(true));
         }
 
+        /// <summary>
+        /// Traces this instance.
+        /// </summary>
         [Scenario("Tracing")]
         [TestMethod]
         public void Trace()
