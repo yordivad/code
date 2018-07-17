@@ -10,6 +10,7 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="2.4.0.1044" />
     <PackageReference Include="Microsoft.Xaml" Version="4.0.0.1" />
     <PackageReference Include="Prism.Unity" Version="6.3.0" />
     <PackageReference Include="Prism.Wpf" Version="6.3.0" />

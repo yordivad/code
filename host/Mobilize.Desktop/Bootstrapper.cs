@@ -11,6 +11,7 @@ namespace Mobilize.Desktop
 
     using Microsoft.Practices.ServiceLocation;
 
+    using Prism.Modularity;
     using Prism.Unity;
 
     /// <summary>
@@ -41,6 +42,16 @@ namespace Mobilize.Desktop
             base.InitializeShell();
             Application.Current.MainWindow = (Window)this.Shell;
             Application.Current.MainWindow?.Show();
+        }
+
+        /// <summary>
+        /// Creates the <see cref="T:Prism.Modularity.IModuleCatalog" /> used by Prism.
+        /// </summary>
+        /// <returns>the ModuleCatalog.</returns>
+        /// <remarks>The base implementation returns a new ModuleCatalog.</remarks>
+        protected override IModuleCatalog CreateModuleCatalog()
+        {
+            return new DynamicModuleCatalog(@"modules\net472");
         }
     }
 }

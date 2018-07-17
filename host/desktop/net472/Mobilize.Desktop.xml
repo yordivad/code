@@ -45,6 +45,114 @@
             Initializes the shell.
             </summary>
         </member>
+        <member name="M:Mobilize.Desktop.Bootstrapper.CreateModuleCatalog">
+            <summary>
+            Creates the <see cref="T:Prism.Modularity.IModuleCatalog" /> used by Prism.
+            </summary>
+            <returns>the ModuleCatalog.</returns>
+            <remarks>The base implementation returns a new ModuleCatalog.</remarks>
+        </member>
+        <member name="T:Mobilize.Desktop.Module.DomainExtension">
+            <summary>
+            Class DomainExtension.
+            </summary>
+        </member>
+        <member name="M:Mobilize.Desktop.Module.DomainExtension.Clone(System.AppDomain)">
+            <summary>
+            Clones the specified domain.
+            </summary>
+            <param name="domain">The domain.</param>
+            <returns>the clone.</returns>
+        </member>
+        <member name="M:Mobilize.Desktop.Module.DomainExtension.GetModules(System.AppDomain,System.String)">
+            <summary>
+            Gets the modules.
+            </summary>
+            <param name="domain">The domain.</param>
+            <param name="path">The path.</param>
+            <returns>the modules..</returns>
+        </member>
+        <member name="M:Mobilize.Desktop.Module.DomainExtension.LocalAssemblies(System.AppDomain)">
+            <summary>
+            Locals the assemblies.
+            </summary>
+            <param name="domain">The domain.</param>
+            <returns>the list of local assemblies</returns>
+        </member>
+        <member name="T:Mobilize.Desktop.DynamicModuleCatalog">
+            <summary>
+            Class DynamicModuleCatalog.
+            </summary>
+            <seealso cref="T:Prism.Modularity.ModuleCatalog" />
+        </member>
+        <member name="M:Mobilize.Desktop.DynamicModuleCatalog.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobilize.Desktop.DynamicModuleCatalog"/> class.
+            </summary>
+            <param name="path">The path.</param>
+        </member>
+        <member name="M:Mobilize.Desktop.DynamicModuleCatalog.LoadModule(System.String)">
+            <summary>
+            Loads the module.
+            </summary>
+            <param name="path">The path.</param>
+        </member>
+        <member name="M:Mobilize.Desktop.DynamicModuleCatalog.ModuleWatcher(System.Object,System.IO.FileSystemEventArgs)">
+            <summary>
+            Modules the watcher.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.IO.FileSystemEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="T:Mobilize.Desktop.ModuleLoader">
+            <summary>
+            Class ModuleLoader.
+            </summary>
+            <seealso cref="T:System.MarshalByRefObject" />
+        </member>
+        <member name="M:Mobilize.Desktop.ModuleLoader.GetModuleInfos(System.String)">
+            <summary>
+            Gets the module infos.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>the ModuleInfo[].</returns>
+        </member>
+        <member name="M:Mobilize.Desktop.ModuleLoader.LoadAssemblies(System.String[])">
+            <summary>
+            Loads the assemblies.
+            </summary>
+            <param name="assemblies">The assemblies.</param>
+        </member>
+        <member name="M:Mobilize.Desktop.ModuleLoader.CreateModuleInfo(System.Type)">
+            <summary>
+            Creates the module information.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The ModuleInfo.</returns>
+        </member>
+        <member name="M:Mobilize.Desktop.ModuleLoader.GetNotLoadedModule(System.IO.DirectoryInfo,System.Type)">
+            <summary>
+            Gets the not  loaded module .
+            </summary>
+            <param name="directory">The directory.</param>
+            <param name="moduleType">Type of the i module.</param>
+            <returns>The modules</returns>
+        </member>
+        <member name="M:Mobilize.Desktop.ModuleLoader.LoadedAssemblies(System.IO.DirectoryInfo)">
+            <summary>
+            Loaded  assemblies.
+            </summary>
+            <param name="directory">The directory.</param>
+            <returns>The files info.</returns>
+        </member>
+        <member name="M:Mobilize.Desktop.ModuleLoader.OnReflectionOnlyResolve(System.ResolveEventArgs,System.IO.DirectoryInfo)">
+            <summary>
+            Called when [reflection only resolve].
+            </summary>
+            <param name="args">The <see cref="T:System.ResolveEventArgs"/> instance containing the event data.</param>
+            <param name="directory">The directory.</param>
+            <returns>The Assembly.</returns>
+        </member>
         <member name="T:Mobilize.Desktop.Shell">
             <summary>
             Interaction logic for Shell.xaml
