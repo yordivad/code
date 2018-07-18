@@ -58,72 +58,54 @@ namespace Mobilize.Grammar.Graph
         ///     Adds the edge.
         /// </summary>
         /// <param name="edge">The edge.</param>
-        public void AddEdge(Edge<TVertex> edge)
-        {
-            this.edges.Add(edge);
-        }
+        public void AddEdge(Edge<TVertex> edge) => this.edges.Add(edge);
 
         /// <summary>
         ///     Adds the edge.
         /// </summary>
         /// <param name="in">The in.</param>
         /// <param name="out">The out.</param>
-        public void AddEdge(TVertex @in, TVertex @out)
-        {
-            this.AddEdge(new Edge<TVertex>(@in, @out));
-        }
+        public void AddEdge(TVertex @in, TVertex @out) => this.AddEdge(new Edge<TVertex>(@in, @out));
 
         /// <summary>
         ///     Adds the vertice.
         /// </summary>
         /// <param name="vertice">The vertice.</param>
-        public void AddVertex(TVertex vertice)
-        {
-            this.vertex.Add(vertice);
-        }
+        public void AddVertex(TVertex vertice) => this.vertex.Add(vertice);
 
         /// <summary>
         ///     Adjacency  dictionary.
         /// </summary>
         /// <returns>IEnumerable&lt;IDictionary&lt;TVertex, IEnumerable&lt;TVertex&gt;&gt;&gt;.</returns>
-        public IDictionary<TVertex, IEnumerable<TVertex>> AdjacencyDictionary()
-        {
-            return this.vertex.Select(v => new KeyValuePair<TVertex, IEnumerable<TVertex>>(v, this.Neighbors(v)))
+        public IDictionary<TVertex, IEnumerable<TVertex>> AdjacencyDictionary() =>
+            this.vertex.Select(v => new KeyValuePair<TVertex, IEnumerable<TVertex>>(v, this.Neighbors(v)))
                 .ToDictionary();
-        }
 
         /// <summary>
         ///     Adjacency the list.
         /// </summary>
         /// <returns>Frame&lt;TVertex, TVertex&gt;.</returns>
-        public Frame<TVertex, TVertex> AdjacencyTable()
-        {
-            return Frame.FromValues(
+        public Frame<TVertex, TVertex> AdjacencyTable() =>
+            Frame.FromValues(
                 this.vertex.SelectMany(
                     row => this.vertex.Select(
                         column => Tuple.Create(row, column, this.IsConnected(row, column) ? 1 : 0))));
-        }
 
         /// <summary>
         ///     Degrees the specified vertice.
         /// </summary>
         /// <param name="vertice">The vertice.</param>
         /// <returns>The degree of the vertice</returns>
-        public int Degree(TVertex vertice)
-        {
-            return this.edges.Count(c => c.Endpoints.In.Is(vertice))
-                   + this.edges.Count(c => c.Endpoints.Out.Is(vertice));
-        }
+        public int Degree(TVertex vertice) =>
+            this.edges.Count(c => c.Endpoints.In.Is(vertice)) + this.edges.Count(c => c.Endpoints.Out.Is(vertice));
 
         /// <summary>
         ///     Ins the vertex.
         /// </summary>
         /// <param name="vertice">The vertice.</param>
         /// <returns>The List of in vertex;.</returns>
-        public IEnumerable<TVertex> InVertex(TVertex vertice)
-        {
-            return this.edges.Where(v => v.Endpoints.In.Is(vertice)).Select(c => c.Endpoints.Out);
-        }
+        public IEnumerable<TVertex> InVertex(TVertex vertice) =>
+            this.edges.Where(v => v.Endpoints.In.Is(vertice)).Select(c => c.Endpoints.Out);
 
         /// <summary>
         ///     Determines whether the specified vertex1 is connected.
@@ -131,39 +113,30 @@ namespace Mobilize.Grammar.Graph
         /// <param name="vertex1">The vertex1.</param>
         /// <param name="vertex2">The vertex2.</param>
         /// <returns>Determine if two vertex are connected.</returns>
-        public bool IsConnected(TVertex vertex1, TVertex vertex2)
-        {
-            return this.Edges.Any(e => e.Is(vertex1, vertex2) || e.Is(vertex2, vertex1));
-        }
+        public bool IsConnected(TVertex vertex1, TVertex vertex2) =>
+            this.Edges.Any(e => e.Is(vertex1, vertex2) || e.Is(vertex2, vertex1));
 
         /// <summary>
         ///     Determines whether this instance is even.
         /// </summary>
         /// <returns><c>true</c> if this instance is even; otherwise, <c>false</c>.</returns>
-        public bool IsEven()
-        {
-            return this.vertex.Sum(this.Degree) % 2 == 0;
-        }
+        public bool IsEven() => this.vertex.Sum(this.Degree) % 2 == 0;
 
         /// <summary>
         ///     Neighbors the specified vertice.
         /// </summary>
         /// <param name="vertice">The vertice.</param>
         /// <returns>the List of the neighbors.</returns>
-        public IEnumerable<TVertex> Neighbors(TVertex vertice)
-        {
-            return this.InVertex(vertice).Union(this.OutVertex(vertice)).Distinct();
-        }
+        public IEnumerable<TVertex> Neighbors(TVertex vertice) =>
+            this.InVertex(vertice).Union(this.OutVertex(vertice)).Distinct();
 
         /// <summary>
         ///     Outs the vertex.
         /// </summary>
         /// <param name="vertice">The vertice.</param>
         /// <returns>The list of out vertex.</returns>
-        public IEnumerable<TVertex> OutVertex(TVertex vertice)
-        {
-            return this.edges.Where(v => v.Endpoints.Out.Is(vertice)).Select(c => c.Endpoints.In);
-        }
+        public IEnumerable<TVertex> OutVertex(TVertex vertice) =>
+            this.edges.Where(v => v.Endpoints.Out.Is(vertice)).Select(c => c.Endpoints.In);
 
         /// <summary>
         ///     Traces the specified vertex.
@@ -197,9 +170,7 @@ namespace Mobilize.Grammar.Graph
         /// <param name="vertex">The vertex.</param>
         /// <param name="visited">The visited.</param>
         /// <returns>Some edges</returns>
-        private Edge<TVertex> Next(TVertex vertex, ISet<Edge<TVertex>> visited)
-        {
-            return this.edges.FirstOrDefault(c => c.Endpoints.In.Is(vertex) && visited.All(e => e != c));
-        }
+        private Edge<TVertex> Next(TVertex vertex, ISet<Edge<TVertex>> visited) =>
+            this.edges.FirstOrDefault(c => c.Endpoints.In.Is(vertex) && visited.All(e => e != c));
     }
 }

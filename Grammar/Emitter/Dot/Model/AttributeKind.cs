@@ -1,9 +1,10 @@
 ﻿// ***********************************************************************
-// <copyright file="AttributeKind.cs" company="Mobilize.Grammar">
-//     Copyright (c) Mobilize.net. All rights reserved.
+// <copyright file="AttributeKind.cs" company="Mobilize">
+//     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace Mobilize.Grammar.Emitter.Dot.Model
 {
     /// <summary>

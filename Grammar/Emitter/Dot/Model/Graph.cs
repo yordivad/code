@@ -79,7 +79,7 @@ namespace Mobilize.Grammar.Emitter.Dot.Model
         /// Adds the statement.
         /// </summary>
         /// <param name="statement">The statement.</param>
-        /// <returns>Graph.</returns>
+        /// <returns>The Graph.</returns>
         public Graph AddStatement(Statement statement)
         {
             this.statements.Add(statement);
@@ -89,7 +89,7 @@ namespace Mobilize.Grammar.Emitter.Dot.Model
         /// <summary>
         /// Renders this instance.
         /// </summary>
-        /// <returns>System.String.</returns>
+        /// <returns>The render string.</returns>
         public string Render()
         {
             return this.Template.Bind("graph").Bind("it", this).Render();

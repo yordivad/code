@@ -13,15 +13,13 @@ namespace Mobilize.App.Graph.Model
     public class Login
     {
         /// <summary>
-        /// Gets or sets the password.
+        /// Gets or sets the Password
         /// </summary>
-        /// <value>The password.</value>
         public string Password { get; set; }
 
         /// <summary>
-        /// Gets or sets the user.
+        /// Gets or sets the User
         /// </summary>
-        /// <value>The user.</value>
         public string User { get; set; }
     }
 }

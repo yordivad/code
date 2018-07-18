@@ -14,9 +14,12 @@ namespace Mobilize.App.Graph
     /// </summary>
     public partial class GraphView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GraphView"/> class.
+        /// </summary>
         public GraphView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

@@ -26,7 +26,10 @@ namespace Mobilize.Grammar.Emitter.Templates
         /// Initializes a new instance of the <see cref="Binder"/> class.
         /// </summary>
         /// <param name="template">The template.</param>
-        public Binder(Antlr4.StringTemplate.Template template) => this.template = template;
+        public Binder(Antlr4.StringTemplate.Template template)
+        {
+            this.template = template;
+        }
 
         /// <summary>
         /// Binds the specified label.

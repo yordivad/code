@@ -11,8 +11,6 @@ namespace Mobilize.Desktop
     using System.Collections.ObjectModel;
     using System.IO;
 
-    using Microsoft.Practices.ObjectBuilder2;
-
     using Mobilize.Desktop.Module;
 
     using Prism.Modularity;
@@ -23,8 +21,6 @@ namespace Mobilize.Desktop
     /// <seealso cref="Prism.Modularity.ModuleCatalog" />
     public class DynamicModuleCatalog : ModuleCatalog
     {
-       
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DynamicModuleCatalog"/> class.
         /// </summary>

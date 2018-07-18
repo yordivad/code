@@ -19,16 +19,26 @@ namespace Mobilize.Grammar.Test.Emitter
     using Mobilize.Quality.Core;
     using Mobilize.Quality.Core.Annotations;
 
+    /// <summary>
+    /// Class DotFeature.
+    /// </summary>
+    /// <seealso cref="Mobilize.Quality.Core.Feature" />
     [TestClass]
     [Feature(@"Adding Template and Emitters")]
     public class DotFeature : Feature
     {
+        /// <summary>
+        /// Emitter this instance.
+        /// </summary>
         [TestMethod]
-        public void Emiter()
+        public void Emitter()
         {
             this.RunScenario(given => this.SetAGraph(), when => this.GraphRender());
         }
 
+        /// <summary>
+        /// Templates this instance.
+        /// </summary>
         [TestMethod]
         [Scenario(@"Templates")]
         public void Template()
@@ -40,6 +50,9 @@ namespace Mobilize.Grammar.Test.Emitter
                 and => this.Render());
         }
 
+        /// <summary>
+        /// Bindings this instance.
+        /// </summary>
         private void Binding()
         {
             var template = this.Scenario.Get<Template>("template");
@@ -48,17 +61,26 @@ namespace Mobilize.Grammar.Test.Emitter
             template.AddMany("items.{lastName, firstName, id}", data[1].lastname, data[1].name, data[1].id);
         }
 
+        /// <summary>
+        /// Defines the data.
+        /// </summary>
         private void DefineData()
         {
             this.Scenario["data"] =
                 new List<(int id, string name, string lastname)> { (1, "Roy", "Gonzalez"), (2, "Max", "Gonzalez") };
         }
 
+        /// <summary>
+        /// Defines the template.
+        /// </summary>
         private void DefineTheTemplate()
         {
             this.Scenario["template"] = new Template("<items:{it|<it.id>: <it.lastName>, <it.firstName>\n}>");
         }
 
+        /// <summary>
+        /// Graphes the render.
+        /// </summary>
         private void GraphRender()
         {
             var graph = this.Scenario.Get<Graph>("graph");
@@ -66,12 +88,18 @@ namespace Mobilize.Grammar.Test.Emitter
             Console.WriteLine(x);
         }
 
+        /// <summary>
+        /// Renders this instance.
+        /// </summary>
         private void Render()
         {
             var template = this.Scenario.Get<Template>("template");
             var info = template.Render();
         }
 
+        /// <summary>
+        /// Sets a graph.
+        /// </summary>
         private void SetAGraph()
         {
             var graph = Emit.Graph("mygraph")

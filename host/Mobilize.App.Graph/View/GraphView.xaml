@@ -55,7 +55,6 @@
             VerticalContentAlignment="Center"
             Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
 
-
         <Button
             Grid.Row="2"
             Grid.Column="1"
@@ -66,7 +65,5 @@
             VerticalAlignment="Bottom"
             Command="{Binding LoginCommand}"
             Content="Sign In" />
-
     </Grid>
-
 </UserControl>

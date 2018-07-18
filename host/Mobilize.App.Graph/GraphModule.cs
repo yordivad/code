@@ -13,7 +13,6 @@ namespace Mobilize.App.Graph
     /// <summary>
     /// Class GraphModule.
     /// </summary>
-    /// <seealso cref="Prism.Modularity.IModule" />
     [Module(ModuleName = "Graph")]
     public class GraphModule : IModule
     {

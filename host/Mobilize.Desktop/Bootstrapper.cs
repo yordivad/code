@@ -10,7 +10,6 @@ namespace Mobilize.Desktop
     using System.Windows;
 
     using Microsoft.Practices.ServiceLocation;
-    using Microsoft.Practices.Unity;
 
     using Prism.Modularity;
     using Prism.Unity;
@@ -22,6 +21,13 @@ namespace Mobilize.Desktop
     public class Bootstrapper : UnityBootstrapper
     {
         /// <summary>
+        /// Creates the <see cref="T:Prism.Modularity.IModuleCatalog" /> used by Prism.
+        /// </summary>
+        /// <returns>the ModuleCatalog.</returns>
+        /// <remarks>The base implementation returns a new ModuleCatalog.</remarks>
+        protected override IModuleCatalog CreateModuleCatalog() => new DynamicModuleCatalog(@"modules\net472");
+
+        /// <summary>
         /// Creates the shell or main window of the application.
         /// </summary>
         /// <returns>The shell of the application.</returns>
@@ -30,10 +36,7 @@ namespace Mobilize.Desktop
         /// the application in its <see cref="F:Prism.Regions.RegionManager.RegionManagerProperty" /> attached property
         /// in order to be able to add regions by using the <see cref="F:Prism.Regions.RegionManager.RegionNameProperty" />
         /// attached property from XAML.</remarks>
-        protected override DependencyObject CreateShell()
-        {
-            return ServiceLocator.Current.GetInstance<Shell>();
-        }
+        protected override DependencyObject CreateShell() => ServiceLocator.Current.GetInstance<Shell>();
 
         /// <summary>
         /// Initializes the shell.
@@ -43,16 +46,6 @@ namespace Mobilize.Desktop
             base.InitializeShell();
             Application.Current.MainWindow = (Window)this.Shell;
             Application.Current.MainWindow?.Show();
-        }
-
-        /// <summary>
-        /// Creates the <see cref="T:Prism.Modularity.IModuleCatalog" /> used by Prism.
-        /// </summary>
-        /// <returns>the ModuleCatalog.</returns>
-        /// <remarks>The base implementation returns a new ModuleCatalog.</remarks>
-        protected override IModuleCatalog CreateModuleCatalog()
-        {
-            return new DynamicModuleCatalog(@"modules\net472");
         }
     }
 }

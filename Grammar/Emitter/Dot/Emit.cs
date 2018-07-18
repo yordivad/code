@@ -19,10 +19,7 @@ namespace Mobilize.Grammar.Emitter.Dot
         /// </summary>
         /// <param name="kind">The kind.</param>
         /// <returns>The AttributeStatement.</returns>
-        public static AttributeStatement AttributeStatement(AttributeKind kind)
-        {
-            return new AttributeStatement(kind);
-        }
+        public static AttributeStatement AttributeStatement(AttributeKind kind) => new AttributeStatement(kind);
 
         /// <summary>
         /// Dis the graph.
@@ -30,10 +27,7 @@ namespace Mobilize.Grammar.Emitter.Dot
         /// <param name="identifier">The identifier.</param>
         /// <param name="strict">if set to <c>true</c> [strict].</param>
         /// <returns>The Digraph.</returns>
-        public static Graph DiGraph(string identifier, bool strict = false)
-        {
-            return new Model.Graph(GraphKind.digraph, identifier, strict);
-        }
+        public static Graph DiGraph(string identifier, bool strict = false) => new Graph(GraphKind.Digraph, identifier, strict);
 
         /// <summary>
         /// Graph the specified identifier.
@@ -43,7 +37,7 @@ namespace Mobilize.Grammar.Emitter.Dot
         /// <returns>The Graph.</returns>
         public static Graph Graph(string identifier, bool strict = false)
         {
-            return new Model.Graph(GraphKind.graph, identifier, strict);
+            return new Graph(GraphKind.Graph, identifier, strict);
         }
 
         /// <summary>

@@ -9,8 +9,6 @@ namespace Mobilize.Desktop
 {
     using System.Windows;
 
-    using Prism.Modularity;
-
     /// <summary>
     /// Interaction logic for Shell.xaml
     /// </summary>

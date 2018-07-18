@@ -23,6 +23,25 @@ namespace Mobilize.Desktop
     public class ModuleLoader : MarshalByRefObject
     {
         /// <summary>
+        /// Loads the assemblies.
+        /// </summary>
+        /// <param name="assemblies">The assemblies.</param>
+        public void LoadAssemblies(string[] assemblies)
+        {
+            foreach (var assemblyPath in assemblies)
+            {
+                try
+                {
+                    Assembly.ReflectionOnlyLoadFrom(assemblyPath);
+                }
+                catch (FileNotFoundException)
+                {
+                    // Continue loading assemblies even if an assembly can not be loaded in the new AppDomain
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets the module infos.
         /// </summary>
         /// <param name="path">The path.</param>
@@ -41,25 +60,6 @@ namespace Mobilize.Desktop
             var modules = GetNotLoadedModule(directory, moduleType);
 
             return modules.ToArray();
-        }
-
-        /// <summary>
-        /// Loads the assemblies.
-        /// </summary>
-        /// <param name="assemblies">The assemblies.</param>
-        public void LoadAssemblies(string[] assemblies)
-        {
-            foreach (var assemblyPath in assemblies)
-            {
-                try
-                {
-                    Assembly.ReflectionOnlyLoadFrom(assemblyPath);
-                }
-                catch (FileNotFoundException)
-                {
-                    // Continue loading assemblies even if an assembly can not be loaded in the new AppDomain
-                }
-            }
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Mobilize.Desktop
                                              : InitializationMode
                                                  .WhenAvailable,
                                      Ref = type.Assembly
-                                         .EscapedCodeBase,
+                                         .EscapedCodeBase
                                  };
             moduleInfo.DependsOn.AddRange(dependsOn);
             return moduleInfo;
@@ -126,7 +126,6 @@ namespace Mobilize.Desktop
         private static IEnumerable<ModuleInfo> GetNotLoadedModule(DirectoryInfo directory, Type moduleType)
         {
             var validAssemblies = LoadedAssemblies(directory);
-            
 
             return validAssemblies.SelectMany(
                 file => Assembly.ReflectionOnlyLoadFrom(file.FullName).GetExportedTypes()

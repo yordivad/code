@@ -62,13 +62,11 @@ namespace Mobilize.Desktop.Module
         /// </summary>
         /// <param name="domain">The domain.</param>
         /// <returns>the list of local assemblies</returns>
-        private static IEnumerable<Assembly> LocalAssemblies(this AppDomain domain)
-        {
-            return from Assembly assembly in domain.GetAssemblies()
-                   where !(assembly is System.Reflection.Emit.AssemblyBuilder)
-                         && assembly.GetType().FullName != "System.Reflection.Emit.InternalAssemblyBuilder"
-                         && !string.IsNullOrEmpty(assembly.Location)
-                   select assembly;
-        }
+        private static IEnumerable<Assembly> LocalAssemblies(this AppDomain domain) =>
+            from Assembly assembly in domain.GetAssemblies()
+            where !(assembly is System.Reflection.Emit.AssemblyBuilder)
+                  && assembly.GetType().FullName != "System.Reflection.Emit.InternalAssemblyBuilder"
+                  && !string.IsNullOrEmpty(assembly.Location)
+            select assembly;
     }
 }

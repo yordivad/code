@@ -1,9 +1,10 @@
 ﻿// ***********************************************************************
-// <copyright file="GraphKind.cs" company="Mobilize.Grammar">
-//     Copyright (c) Mobilize.net. All rights reserved.
+// <copyright file="GraphKind.cs" company="Mobilize">
+//     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace Mobilize.Grammar.Emitter.Dot.Model
 {
     /// <summary>
@@ -14,11 +15,11 @@ namespace Mobilize.Grammar.Emitter.Dot.Model
         /// <summary>
         /// The graph
         /// </summary>
-        graph,
+        Graph,
 
         /// <summary>
         /// The digraph
         /// </summary>
-        digraph
+        Digraph
     }
 }

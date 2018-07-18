@@ -29,6 +29,13 @@
             </summary>
             <seealso cref="T:Prism.Unity.UnityBootstrapper" />
         </member>
+        <member name="M:Mobilize.Desktop.Bootstrapper.CreateModuleCatalog">
+            <summary>
+            Creates the <see cref="T:Prism.Modularity.IModuleCatalog" /> used by Prism.
+            </summary>
+            <returns>the ModuleCatalog.</returns>
+            <remarks>The base implementation returns a new ModuleCatalog.</remarks>
+        </member>
         <member name="M:Mobilize.Desktop.Bootstrapper.CreateShell">
             <summary>
             Creates the shell or main window of the application.
@@ -44,13 +51,6 @@
             <summary>
             Initializes the shell.
             </summary>
-        </member>
-        <member name="M:Mobilize.Desktop.Bootstrapper.CreateModuleCatalog">
-            <summary>
-            Creates the <see cref="T:Prism.Modularity.IModuleCatalog" /> used by Prism.
-            </summary>
-            <returns>the ModuleCatalog.</returns>
-            <remarks>The base implementation returns a new ModuleCatalog.</remarks>
         </member>
         <member name="T:Mobilize.Desktop.Module.DomainExtension">
             <summary>
@@ -110,18 +110,18 @@
             </summary>
             <seealso cref="T:System.MarshalByRefObject" />
         </member>
+        <member name="M:Mobilize.Desktop.ModuleLoader.LoadAssemblies(System.String[])">
+            <summary>
+            Loads the assemblies.
+            </summary>
+            <param name="assemblies">The assemblies.</param>
+        </member>
         <member name="M:Mobilize.Desktop.ModuleLoader.GetModuleInfos(System.String)">
             <summary>
             Gets the module infos.
             </summary>
             <param name="path">The path.</param>
             <returns>the ModuleInfo[].</returns>
-        </member>
-        <member name="M:Mobilize.Desktop.ModuleLoader.LoadAssemblies(System.String[])">
-            <summary>
-            Loads the assemblies.
-            </summary>
-            <param name="assemblies">The assemblies.</param>
         </member>
         <member name="M:Mobilize.Desktop.ModuleLoader.CreateModuleInfo(System.Type)">
             <summary>

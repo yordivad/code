@@ -21,10 +21,7 @@ namespace Mobilize.Grammar.Graph
         /// <param name="item">The item.</param>
         /// <param name="other">The other.</param>
         /// <returns><c>true</c> if [is] [the specified other]; otherwise, <c>false</c>.</returns>
-        public static bool Is<T>(this T item, T other)
-        {
-            return EqualityComparer<T>.Default.Equals(item, other);
-        }
+        public static bool Is<T>(this T item, T other) => EqualityComparer<T>.Default.Equals(item, other);
 
         /// <summary>
         ///     Determines whether [has] [the specified in].
@@ -34,9 +31,7 @@ namespace Mobilize.Grammar.Graph
         /// <param name="in">The in.</param>
         /// <param name="out">The out.</param>
         /// <returns><c>true</c> if [has] [the specified in]; otherwise, <c>false</c>.</returns>
-        public static bool Is<T>(this IEdge<T> edge, T @in, T @out)
-        {
-            return edge.Endpoints.In.Is(@in) && edge.Endpoints.Out.Is(@out);
-        }
+        public static bool Is<T>(this IEdge<T> edge, T @in, T @out) =>
+            edge.Endpoints.In.Is(@in) && edge.Endpoints.Out.Is(@out);
     }
 }
