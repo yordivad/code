@@ -25,17 +25,11 @@ namespace Mobilize.App.Graph
         /// Initializes a new instance of the <see cref="GraphModule"/> class.
         /// </summary>
         /// <param name="regionManager">The region manager.</param>
-        public GraphModule(IRegionManager regionManager)
-        {
-            this.regionManager = regionManager;
-        }
+        public GraphModule(IRegionManager regionManager) => this.regionManager = regionManager;
 
         /// <summary>
         /// Notifies the module that it has be initialized.
         /// </summary>
-        public void Initialize()
-        {
-            this.regionManager.RegisterViewWithRegion("MainRegion", typeof(GraphView));
-        }
+        public void Initialize() => this.regionManager.RegisterViewWithRegion("MainRegion", typeof(GraphView));
     }
 }

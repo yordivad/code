@@ -69,52 +69,77 @@ namespace Mobilize.Desktop
         /// <returns>The ModuleInfo.</returns>
         private static ModuleInfo CreateModuleInfo(Type type)
         {
-            var moduleName = type.Name;
-            var onDemand = false;
-            var moduleAttribute = CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(
-                cad => cad.Constructor.DeclaringType.FullName == typeof(ModuleAttribute).FullName);
 
-            if (moduleAttribute != null)
-            {
-                foreach (var argument in moduleAttribute.NamedArguments)
-                {
-                    var argumentName = argument.MemberInfo.Name;
-                    switch (argumentName)
-                    {
-                        case "ModuleName":
-                            moduleName = (string)argument.TypedValue.Value;
-                            break;
 
-                        case "OnDemand":
-                            onDemand = (bool)argument.TypedValue.Value;
-                            break;
 
-                        case "StartupLoaded":
-                            onDemand = !(bool)argument.TypedValue.Value;
-                            break;
-                    }
-                }
-            }
+            var dependsOn = ModuleDependencies(type);
+            var moduleInfo = ModuleInfo(type);
+            moduleInfo.DependsOn.AddRange(dependsOn);
+            return moduleInfo;
+        }
 
+        /// <summary>
+        /// Modules the information.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>the ModuleInfo.</returns>
+        private static ModuleInfo ModuleInfo(Type type)
+        {
+            var configuration = ModuleConfiguration(type);
+
+            return new ModuleInfo(configuration.moduleName, type.AssemblyQualifiedName)
+                       {
+                           InitializationMode =
+                               configuration.onDemand
+                                   ? InitializationMode
+                                       .OnDemand
+                                   : InitializationMode
+                                       .WhenAvailable,
+                           Ref = type.Assembly
+                               .EscapedCodeBase
+                       };
+
+        }
+
+        /// <summary>
+        /// Modules the dependencies.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The list of dependencies;.</returns>
+        private static List<string> ModuleDependencies(Type type)
+        {
             var moduleDependencyAttributes = CustomAttributeData.GetCustomAttributes(type).Where(
                 cad => cad.Constructor.DeclaringType.FullName == typeof(ModuleDependencyAttribute).FullName);
 
             var dependsOn = moduleDependencyAttributes.Select(cad => (string)cad.ConstructorArguments[0].Value)
                 .ToList();
+            return dependsOn;
+        }
 
-            var moduleInfo = new ModuleInfo(moduleName, type.AssemblyQualifiedName)
-                                 {
-                                     InitializationMode =
-                                         onDemand
-                                             ? InitializationMode
-                                                 .OnDemand
-                                             : InitializationMode
-                                                 .WhenAvailable,
-                                     Ref = type.Assembly
-                                         .EscapedCodeBase
-                                 };
-            moduleInfo.DependsOn.AddRange(dependsOn);
-            return moduleInfo;
+        /// <summary>
+        /// Modules the configuration.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns><c>true</c> if  It is a demand, <c>false</c> otherwise.</returns>
+        private static (string moduleName, bool onDemand) ModuleConfiguration(Type type)
+        {
+            var moduleName = type.Name;
+            var onDemand = false;
+            var moduleAttribute = CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(
+                cad => cad.Constructor.DeclaringType.FullName == typeof(ModuleAttribute).FullName);
+
+            if (moduleAttribute == null)
+            {
+                return (moduleName, onDemand);
+            }
+
+            foreach (var argument in moduleAttribute.NamedArguments)
+            {
+                moduleName = ModuleName(argument, moduleName);
+                onDemand = OnDemand(argument);
+            }
+
+            return (moduleName, onDemand);
         }
 
         /// <summary>
@@ -123,15 +148,11 @@ namespace Mobilize.Desktop
         /// <param name="directory">The directory.</param>
         /// <param name="moduleType">Type of the i module.</param>
         /// <returns>The modules</returns>
-        private static IEnumerable<ModuleInfo> GetNotLoadedModule(DirectoryInfo directory, Type moduleType)
-        {
-            var validAssemblies = LoadedAssemblies(directory);
-
-            return validAssemblies.SelectMany(
+        private static IEnumerable<ModuleInfo> GetNotLoadedModule(DirectoryInfo directory, Type moduleType) =>
+            LoadedAssemblies(directory).SelectMany(
                 file => Assembly.ReflectionOnlyLoadFrom(file.FullName).GetExportedTypes()
                     .Where(moduleType.IsAssignableFrom).Where(t => t != moduleType).Where(t => !t.IsAbstract)
                     .Select(type => CreateModuleInfo(type)));
-        }
 
         /// <summary>
         /// Loaded  assemblies.
@@ -161,6 +182,43 @@ namespace Mobilize.Desktop
             }
 
             return validAssemblies;
+        }
+
+        /// <summary>
+        /// Modules the name.
+        /// </summary>
+        /// <param name="argument">The argument.</param>
+        /// <param name="default">The default.</param>
+        /// <returns>The method name</returns>
+        private static string ModuleName(CustomAttributeNamedArgument argument, string @default)
+        {
+            var argumentName = argument.MemberInfo.Name;
+            if (argumentName == "ModuleName")
+            {
+                return (string)argument.TypedValue.Value;
+            }
+
+            return @default;
+        }
+
+        /// <summary>
+        /// Called when [demand].
+        /// </summary>
+        /// <param name="argument">The argument.</param>
+        /// <returns><c>true</c> if  the attribute is by demand, <c>false</c> otherwise.</returns>
+        private static bool OnDemand(CustomAttributeNamedArgument argument)
+        {
+            var argumentName = argument.MemberInfo.Name;
+            if (argumentName == "OnDemand")
+            {
+                return (bool)argument.TypedValue.Value;
+            }
+            else if (argumentName == "StartupLoaded")
+            {
+                return !(bool)argument.TypedValue.Value;
+            }
+
+            return false;
         }
 
         /// <summary>

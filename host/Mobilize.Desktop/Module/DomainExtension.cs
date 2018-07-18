@@ -25,12 +25,7 @@ namespace Mobilize.Desktop.Module
         /// </summary>
         /// <param name="domain">The domain.</param>
         /// <returns>the clone.</returns>
-        public static AppDomain Clone(this AppDomain domain)
-        {
-            var evidence = new Evidence(domain.Evidence);
-            var setup = domain.SetupInformation;
-            return AppDomain.CreateDomain("DiscoveryRegion", evidence, setup);
-        }
+        public static AppDomain Clone(this AppDomain domain) => AppDomain.CreateDomain("DiscoveryRegion", new Evidence(domain.Evidence), domain.SetupInformation);
 
         /// <summary>
         /// Gets the modules.
@@ -41,20 +36,30 @@ namespace Mobilize.Desktop.Module
         public static IEnumerable<ModuleInfo> GetModules(this AppDomain domain, string path)
         {
             var clone = domain.Clone();
-
             try
             {
-                var assemblies = domain.LocalAssemblies();
-                var type = typeof(ModuleLoader);
-                var loader = (ModuleLoader)clone.CreateInstanceFromAndUnwrap(type.Assembly.Location, type.FullName);
-                loader.LoadAssemblies(assemblies.Select(c => c.Location).ToArray());
-                var x = loader.GetModuleInfos(path);
-                return x;
+                return ModuleLoader(domain, clone).GetModuleInfos(path);
             }
             finally
             {
                 AppDomain.Unload(clone);
             }
+        }
+
+        /// <summary>
+        /// Modules the loader.
+        /// </summary>
+        /// <param name="domain">The domain.</param>
+        /// <param name="clone">The clone.</param>
+        /// <returns>The ModuleLoader.</returns>
+        private static ModuleLoader ModuleLoader(AppDomain domain, AppDomain clone)
+        {
+            
+            var assemblies = domain.LocalAssemblies();
+            var type = typeof(ModuleLoader);
+            var loader = (ModuleLoader)clone.CreateInstanceFromAndUnwrap(type.Assembly.Location, type.FullName);
+            loader.LoadAssemblies(assemblies.Select(c => c.Location).ToArray());
+            return loader;
         }
 
         /// <summary>

@@ -18,9 +18,6 @@ namespace Mobilize.Desktop
         /// <summary>
         /// Initializes a new instance of the <see cref="Shell"/> class.
         /// </summary>
-        public Shell()
-        {
-            InitializeComponent();
-        }
+        public Shell() => this.InitializeComponent();
     }
 }
