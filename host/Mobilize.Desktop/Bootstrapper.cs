@@ -10,6 +10,7 @@ namespace Mobilize.Desktop
     using System.Windows;
 
     using Microsoft.Practices.ServiceLocation;
+    using Microsoft.Practices.Unity;
 
     using Prism.Modularity;
     using Prism.Unity;

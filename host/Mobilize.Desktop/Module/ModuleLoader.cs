@@ -99,7 +99,8 @@ namespace Mobilize.Desktop
             var moduleDependencyAttributes = CustomAttributeData.GetCustomAttributes(type).Where(
                 cad => cad.Constructor.DeclaringType.FullName == typeof(ModuleDependencyAttribute).FullName);
 
-            var dependsOn = moduleDependencyAttributes.Select(cad => (string)cad.ConstructorArguments[0].Value).ToList();
+            var dependsOn = moduleDependencyAttributes.Select(cad => (string)cad.ConstructorArguments[0].Value)
+                .ToList();
 
             var moduleInfo = new ModuleInfo(moduleName, type.AssemblyQualifiedName)
                                  {
