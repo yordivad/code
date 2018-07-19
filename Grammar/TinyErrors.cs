@@ -76,14 +76,15 @@ namespace Mobilize.Grammar
             int line,
             int charPositionInLine,
             string msg,
-            RecognitionException e) => this.errors.Add(
+            RecognitionException e) =>
+            this.errors.Add(
                 new Error
-                {
-                    CharLine = charPositionInLine,
-                    Line = line,
-                    Message = msg,
-                    Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
-                });
+                    {
+                        CharLine = charPositionInLine,
+                        Line = line,
+                        Message = msg,
+                        Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
+                    });
 
         /// <summary>
         ///     Upon syntax error, notify any interested parties.
@@ -132,13 +133,14 @@ namespace Mobilize.Grammar
             int line,
             int charPositionInLine,
             string msg,
-            RecognitionException e) => this.errors.Add(
+            RecognitionException e) =>
+            this.errors.Add(
                 new Error
-                {
-                    CharLine = charPositionInLine,
-                    Line = line,
-                    Message = msg,
-                    Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
-                });
+                    {
+                        CharLine = charPositionInLine,
+                        Line = line,
+                        Message = msg,
+                        Source = $"{recognizer.GrammarFileName} {recognizer.InputStream.SourceName}"
+                    });
     }
 }

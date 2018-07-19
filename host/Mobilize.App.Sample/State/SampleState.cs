@@ -14,20 +14,16 @@ namespace Mobilize.App.Sample.State
     /// <summary>
     /// Class SampleState.
     /// </summary>
-    /// <seealso cref="Mobilize.App.Sample.State.ISampleState" />
-    /// <seealso cref="ISampleState" />
-    public class SampleState 
+    public class SampleState
     {
         /// <summary>
-        /// Gets or sets the companies.
+        /// Gets or sets the Companies
         /// </summary>
-        /// <value>The companies.</value>
         public IEnumerable<Company> Companies { get; set; }
 
         /// <summary>
         /// Gets the user store.
         /// </summary>
-        /// <value>The user store.</value>
         public IEnumerable<User> Users { get; }
     }
 }

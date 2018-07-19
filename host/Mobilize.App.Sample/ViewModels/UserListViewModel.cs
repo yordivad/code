@@ -16,32 +16,39 @@ namespace Mobilize.App.Sample.ViewModels
     using Mobilize.App.Sample.State;
 
     using ReactiveUI;
+    using ReactiveUI.Fody.Helpers;
 
     /// <summary>
     /// Class UserListViewModel.
     /// </summary>
-    /// <seealso cref="ReactiveUI.ReactiveObject" />
     public class UserListViewModel : ReactiveObject
     {
         /// <summary>
         /// The store
         /// </summary>
-        private ISampleStore store;
+        private readonly ISampleStore store;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserListViewModel"/> class.
         /// </summary>
         /// <param name="store">The store.</param>
-        public UserListViewModel(ISampleStore store)
+        public UserListViewModel(ISampleStore store = null)
         {
             this.store = store;
-            this.store.State.Select(Specs.GetUsers).Subscribe(c => this.Users = c.Select(u => new UserViewModel(u)));
+            this.store.State.Select(Specs.GetUsers)
+                .Subscribe(c => this.Users = c.Select(u => new UserDetailViewModel(u)));
         }
 
         /// <summary>
-        /// Gets or sets the users.
+        /// Gets or sets the filter.
         /// </summary>
-        /// <value>The users.</value>
-        public IEnumerable<UserViewModel> Users { get; set; }
+        /// <value>The filter.</value>
+        [Reactive]
+        public string Filter { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Users
+        /// </summary>
+        public IEnumerable<UserDetailViewModel> Users { get; set; }
     }
 }

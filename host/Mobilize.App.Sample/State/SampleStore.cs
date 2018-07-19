@@ -12,7 +12,6 @@ namespace Mobilize.App.Sample.State
     /// <summary>
     /// Class SampleStore.
     /// </summary>
-    /// <seealso cref="Mobilize.App.Sample.State.ISampleStore" />
     public class SampleStore : ISampleStore
     {
         /// <summary>
@@ -20,13 +19,13 @@ namespace Mobilize.App.Sample.State
         /// </summary>
         public SampleStore()
         {
-            this.Store = new Store<SampleState>(Reducers.ReduceApplication);
+            this.State = new Store<SampleState>(Reducers.ReduceApplication);
         }
 
         /// <summary>
+        /// Gets the State
         /// Gets  the store.
         /// </summary>
-        /// <value>The store.</value>
-        public IStore<SampleState> Store { get; }
+        public IStore<SampleState> State { get; }
     }
 }

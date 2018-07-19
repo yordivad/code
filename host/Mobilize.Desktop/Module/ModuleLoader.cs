@@ -5,7 +5,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace Mobilize.Desktop
+namespace Mobilize.Desktop.Module
 {
     using System;
     using System.Collections.Generic;
@@ -69,77 +69,10 @@ namespace Mobilize.Desktop
         /// <returns>The ModuleInfo.</returns>
         private static ModuleInfo CreateModuleInfo(Type type)
         {
-
-
-
             var dependsOn = ModuleDependencies(type);
             var moduleInfo = ModuleInfo(type);
             moduleInfo.DependsOn.AddRange(dependsOn);
             return moduleInfo;
-        }
-
-        /// <summary>
-        /// Modules the information.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>the ModuleInfo.</returns>
-        private static ModuleInfo ModuleInfo(Type type)
-        {
-            var configuration = ModuleConfiguration(type);
-
-            return new ModuleInfo(configuration.moduleName, type.AssemblyQualifiedName)
-                       {
-                           InitializationMode =
-                               configuration.onDemand
-                                   ? InitializationMode
-                                       .OnDemand
-                                   : InitializationMode
-                                       .WhenAvailable,
-                           Ref = type.Assembly
-                               .EscapedCodeBase
-                       };
-
-        }
-
-        /// <summary>
-        /// Modules the dependencies.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The list of dependencies;.</returns>
-        private static List<string> ModuleDependencies(Type type)
-        {
-            var moduleDependencyAttributes = CustomAttributeData.GetCustomAttributes(type).Where(
-                cad => cad.Constructor.DeclaringType.FullName == typeof(ModuleDependencyAttribute).FullName);
-
-            var dependsOn = moduleDependencyAttributes.Select(cad => (string)cad.ConstructorArguments[0].Value)
-                .ToList();
-            return dependsOn;
-        }
-
-        /// <summary>
-        /// Modules the configuration.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns><c>true</c> if  It is a demand, <c>false</c> otherwise.</returns>
-        private static (string moduleName, bool onDemand) ModuleConfiguration(Type type)
-        {
-            var moduleName = type.Name;
-            var onDemand = false;
-            var moduleAttribute = CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(
-                cad => cad.Constructor.DeclaringType.FullName == typeof(ModuleAttribute).FullName);
-
-            if (moduleAttribute == null)
-            {
-                return (moduleName, onDemand);
-            }
-
-            foreach (var argument in moduleAttribute.NamedArguments)
-            {
-                moduleName = ModuleName(argument, moduleName);
-                onDemand = OnDemand(argument);
-            }
-
-            return (moduleName, onDemand);
         }
 
         /// <summary>
@@ -185,6 +118,69 @@ namespace Mobilize.Desktop
         }
 
         /// <summary>
+        /// Modules the configuration.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns><c>true</c> if  It is a demand, <c>false</c> otherwise.</returns>
+        private static (string moduleName, bool onDemand) ModuleConfiguration(Type type)
+        {
+            var moduleName = type.Name;
+            var onDemand = false;
+            var moduleAttribute = CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(
+                cad => cad.Constructor.DeclaringType.FullName == typeof(ModuleAttribute).FullName);
+
+            if (moduleAttribute == null)
+            {
+                return (moduleName, onDemand);
+            }
+
+            foreach (var argument in moduleAttribute.NamedArguments)
+            {
+                moduleName = ModuleName(argument, moduleName);
+                onDemand = OnDemand(argument);
+            }
+
+            return (moduleName, onDemand);
+        }
+
+        /// <summary>
+        /// Modules the dependencies.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The list of dependencies;.</returns>
+        private static List<string> ModuleDependencies(Type type)
+        {
+            var moduleDependencyAttributes = CustomAttributeData.GetCustomAttributes(type).Where(
+                cad => cad.Constructor.DeclaringType.FullName == typeof(ModuleDependencyAttribute).FullName);
+
+            var dependsOn = moduleDependencyAttributes.Select(cad => (string)cad.ConstructorArguments[0].Value)
+                .ToList();
+            return dependsOn;
+        }
+
+        /// <summary>
+        /// Modules the information.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>the ModuleInfo.</returns>
+        private static ModuleInfo ModuleInfo(Type type)
+        {
+            var configuration = ModuleConfiguration(type);
+
+            return new ModuleInfo(configuration.moduleName, type.AssemblyQualifiedName)
+                       {
+                           InitializationMode =
+                               configuration.onDemand
+                                   ? InitializationMode
+                                       .OnDemand
+                                   : InitializationMode
+                                       .WhenAvailable,
+                           Ref = type.Assembly
+                               .EscapedCodeBase
+                       };
+        }
+
+        /// <summary>
         /// Modules the name.
         /// </summary>
         /// <param name="argument">The argument.</param>
@@ -213,7 +209,8 @@ namespace Mobilize.Desktop
             {
                 return (bool)argument.TypedValue.Value;
             }
-            else if (argumentName == "StartupLoaded")
+
+            if (argumentName == "StartupLoaded")
             {
                 return !(bool)argument.TypedValue.Value;
             }

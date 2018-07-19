@@ -7,13 +7,15 @@
 
 namespace Mobilize.App.Graph
 {
+    using Mobilize.App.Graph.View;
+
     using Prism.Modularity;
     using Prism.Regions;
 
     /// <summary>
     /// Class GraphModule.
     /// </summary>
-    [Module(ModuleName = "Graph")]
+    [Module(ModuleName = "Graph", OnDemand = true)]
     public class GraphModule : IModule
     {
         /// <summary>

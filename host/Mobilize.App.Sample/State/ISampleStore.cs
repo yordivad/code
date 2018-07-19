@@ -15,9 +15,9 @@ namespace Mobilize.App.Sample.State
     public interface ISampleStore
     {
         /// <summary>
+        /// Gets the State
         /// Gets or sets the store.
         /// </summary>
-        /// <value>The store.</value>
-        IStore<SampleState> Store { get; }
+        IStore<SampleState> State { get; }
     }
 }

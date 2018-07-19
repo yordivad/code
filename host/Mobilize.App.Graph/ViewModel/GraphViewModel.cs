@@ -8,6 +8,7 @@
 namespace Mobilize.App.Graph.ViewModel
 {
     using Mobilize.App.Graph.Model;
+
     using ReactiveUI;
     using ReactiveUI.Fody.Helpers;
 
@@ -17,18 +18,13 @@ namespace Mobilize.App.Graph.ViewModel
     public class GraphViewModel : ReactiveObject
     {
         /// <summary>
-        /// The model
-        /// </summary>
-        private readonly Login model;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GraphViewModel"/> class.
         /// </summary>
         public GraphViewModel()
         {
-            this.model = new Login();
-            this.LoginCommand = ReactiveCommand.Create<string, bool>(s => this.model.User == "Roy");
-            this.WhenAnyValue(c => c.UserName).BindTo(this.model, l => l.User);
+            var model = new Login();
+            this.LoginCommand = ReactiveCommand.Create<string, bool>(s => model.User == "Roy");
+            this.WhenAnyValue(c => c.UserName).BindTo(model, l => l.User);
         }
 
         /// <summary>

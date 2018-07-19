@@ -25,7 +25,8 @@ namespace Mobilize.Desktop.Module
         /// </summary>
         /// <param name="domain">The domain.</param>
         /// <returns>the clone.</returns>
-        public static AppDomain Clone(this AppDomain domain) => AppDomain.CreateDomain("DiscoveryRegion", new Evidence(domain.Evidence), domain.SetupInformation);
+        public static AppDomain Clone(this AppDomain domain) =>
+            AppDomain.CreateDomain("DiscoveryRegion", new Evidence(domain.Evidence), domain.SetupInformation);
 
         /// <summary>
         /// Gets the modules.
@@ -47,22 +48,6 @@ namespace Mobilize.Desktop.Module
         }
 
         /// <summary>
-        /// Modules the loader.
-        /// </summary>
-        /// <param name="domain">The domain.</param>
-        /// <param name="clone">The clone.</param>
-        /// <returns>The ModuleLoader.</returns>
-        private static ModuleLoader ModuleLoader(AppDomain domain, AppDomain clone)
-        {
-            
-            var assemblies = domain.LocalAssemblies();
-            var type = typeof(ModuleLoader);
-            var loader = (ModuleLoader)clone.CreateInstanceFromAndUnwrap(type.Assembly.Location, type.FullName);
-            loader.LoadAssemblies(assemblies.Select(c => c.Location).ToArray());
-            return loader;
-        }
-
-        /// <summary>
         /// Locals the assemblies.
         /// </summary>
         /// <param name="domain">The domain.</param>
@@ -73,5 +58,20 @@ namespace Mobilize.Desktop.Module
                   && assembly.GetType().FullName != "System.Reflection.Emit.InternalAssemblyBuilder"
                   && !string.IsNullOrEmpty(assembly.Location)
             select assembly;
+
+        /// <summary>
+        /// Modules the loader.
+        /// </summary>
+        /// <param name="domain">The domain.</param>
+        /// <param name="clone">The clone.</param>
+        /// <returns>The ModuleLoader.</returns>
+        private static ModuleLoader ModuleLoader(AppDomain domain, AppDomain clone)
+        {
+            var assemblies = domain.LocalAssemblies();
+            var type = typeof(ModuleLoader);
+            var loader = (ModuleLoader)clone.CreateInstanceFromAndUnwrap(type.Assembly.Location, type.FullName);
+            loader.LoadAssemblies(assemblies.Select(c => c.Location).ToArray());
+            return loader;
+        }
     }
 }

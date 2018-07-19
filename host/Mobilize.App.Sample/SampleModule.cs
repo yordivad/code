@@ -13,12 +13,13 @@ namespace Mobilize.App.Sample
     using Mobilize.App.Sample.View;
 
     using Prism.Modularity;
+    using Prism.Regions;
     using Prism.Unity;
 
     /// <summary>
     /// Class SampleModule.
     /// </summary>
-    /// <seealso cref="Prism.Modularity.IModule" />
+    [Module(ModuleName = "Sample")]
     public class SampleModule : IModule
     {
         /// <summary>
@@ -27,11 +28,18 @@ namespace Mobilize.App.Sample
         private readonly IUnityContainer container;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SampleModule"/> class.
+        /// The region manager
+        /// </summary>
+        private readonly IRegionManager regionManager;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SampleModule" /> class.
         /// </summary>
         /// <param name="container">The container.</param>
-        public SampleModule(IUnityContainer container)
+        /// <param name="regionManager">The region manager.</param>
+        public SampleModule(IUnityContainer container, IRegionManager regionManager)
         {
+            this.regionManager = regionManager;
             this.container = container;
         }
 
@@ -40,8 +48,10 @@ namespace Mobilize.App.Sample
         /// </summary>
         public void Initialize()
         {
+            
             this.container.RegisterType<ISampleStore, SampleStore>();
-            this.container.RegisterTypeForNavigation<UsersView>("Content");
+            this.container.RegisterTypeForNavigation<User>("Content");
+            this.regionManager.RegisterViewWithRegion("Content", typeof(User));
         }
     }
 }

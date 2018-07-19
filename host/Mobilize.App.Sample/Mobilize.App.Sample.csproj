@@ -10,6 +10,11 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\desktop\net472\modules\net472\</OutputPath>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="2.4.0.1044" />
     <PackageReference Include="Microsoft.Xaml" Version="4.0.0.1" />
@@ -33,12 +38,27 @@
   <ItemGroup>
     <UpToDateCheckInput Include="**\*.xaml" />
     <Page Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
+    <UpToDateCheckInput Remove="View\User.xaml" />
+    <UpToDateCheckInput Remove="View\UserDetail.xaml" />
+    <UpToDateCheckInput Remove="View\UserList.xaml" />
     <Compile Update="**\*.xaml.cs" SubType="Designer" DependentUpon="%(Filename)" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Middleware\Action\" />
     <Folder Include="Middleware\Reducer\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\UserList.xaml.cs">
+      <DependentUpon>UserList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\UserDetail.xaml.cs">
+      <DependentUpon>UserDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\User.xaml.cs">
+      <DependentUpon>User.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 

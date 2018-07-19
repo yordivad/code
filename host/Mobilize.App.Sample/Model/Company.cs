@@ -15,21 +15,18 @@ namespace Mobilize.App.Sample.Model
     public class Company
     {
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the Address
         /// </summary>
-        /// <value>The name.</value>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the address.
-        /// </summary>
-        /// <value>The address.</value>
         public Address Address { get; set; }
 
         /// <summary>
-        /// Gets or sets the users.
+        /// Gets or sets the Name
         /// </summary>
-        /// <value>The users.</value>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Users
+        /// </summary>
         public IEnumerable<User> Users { get; set; }
     }
 }

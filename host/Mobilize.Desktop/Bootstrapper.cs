@@ -7,11 +7,18 @@
 
 namespace Mobilize.Desktop
 {
+    using System;
+    using System.Globalization;
+    using System.Reflection;
     using System.Windows;
 
     using Microsoft.Practices.ServiceLocation;
+    using Microsoft.Practices.Unity;
+
+    using Mobilize.Desktop.Module;
 
     using Prism.Modularity;
+    using Prism.Mvvm;
     using Prism.Unity;
 
     /// <summary>
@@ -46,6 +53,27 @@ namespace Mobilize.Desktop
             base.InitializeShell();
             Application.Current.MainWindow = (Window)this.Shell;
             Application.Current.MainWindow?.Show();
+        }
+
+        /// <summary>
+        /// Configures the <see cref="T:Prism.Mvvm.ViewModelLocator" /> used by Prism.
+        /// </summary>
+        protected override void ConfigureViewModelLocator()
+        {
+            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(
+                (viewType) =>
+                    {
+                        var viewName = viewType.FullName;
+                        var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+                        var viewModelName = string.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}ViewModel, {1}",
+                            viewName.Replace("View", "ViewModels"),
+                            viewAssemblyName);
+                        return Type.GetType(viewModelName);
+                    });
+
+            ViewModelLocationProvider.SetDefaultViewModelFactory(type => this.Container.Resolve(type));
         }
     }
 }

@@ -1,23 +1,23 @@
 ﻿// ***********************************************************************
-// <copyright file="GraphView.xaml.cs" company="Mobilize">
+// <copyright file="UserDetail.xaml.cs" company="Mobilize">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 
-namespace Mobilize.App.Graph.View
+namespace Mobilize.App.Sample.View
 {
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for GraphView.xaml
+    /// Interaction logic for UserDetail.xaml
     /// </summary>
-    public partial class GraphView : UserControl
+    public partial class UserDetail 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GraphView"/> class.
+        /// Initializes a new instance of the <see cref="UserDetail"/> class.
         /// </summary>
-        public GraphView()
+        public UserDetail()
         {
             this.InitializeComponent();
         }

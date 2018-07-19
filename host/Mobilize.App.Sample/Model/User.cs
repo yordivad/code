@@ -17,25 +17,21 @@ namespace Mobilize.App.Sample.Model
         /// <summary>
         /// Gets or sets the birth date.
         /// </summary>
-        /// <value>The birth date.</value>
         public DateTime BirthDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the company.
+        /// Gets or sets the Company
         /// </summary>
-        /// <value>The company.</value>
         public Company Company { get; set; }
 
         /// <summary>
         /// Gets or sets the last name.
         /// </summary>
-        /// <value>The last name.</value>
         public string LastName { get; set; }
 
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the Name
         /// </summary>
-        /// <value>The name.</value>
         public string Name { get; set; }
     }
 }

@@ -27,7 +27,8 @@ namespace Mobilize.Grammar.Emitter.Dot
         /// <param name="identifier">The identifier.</param>
         /// <param name="strict">if set to <c>true</c> [strict].</param>
         /// <returns>The Digraph.</returns>
-        public static Graph DiGraph(string identifier, bool strict = false) => new Graph(GraphKind.Digraph, identifier, strict);
+        public static Graph DiGraph(string identifier, bool strict = false) =>
+            new Graph(GraphKind.Digraph, identifier, strict);
 
         /// <summary>
         /// Graph the specified identifier.

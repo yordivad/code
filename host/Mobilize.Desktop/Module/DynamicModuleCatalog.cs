@@ -5,13 +5,11 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace Mobilize.Desktop
+namespace Mobilize.Desktop.Module
 {
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
-
-    using Mobilize.Desktop.Module;
 
     using Prism.Modularity;
 

@@ -13,21 +13,18 @@ namespace Mobilize.App.Sample.Model
     public class Address
     {
         /// <summary>
-        /// Gets or sets the city.
+        /// Gets or sets the City
         /// </summary>
-        /// <value>The city.</value>
         public string City { get; set; }
 
         /// <summary>
         /// Gets or sets the postal code.
         /// </summary>
-        /// <value>The postal code.</value>
         public string PostalCode { get; set; }
 
         /// <summary>
-        /// Gets or sets the street.
+        /// Gets or sets the Street
         /// </summary>
-        /// <value>The street.</value>
         public string Street { get; set; }
     }
 }
