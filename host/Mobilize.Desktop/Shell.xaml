@@ -5,6 +5,29 @@
     xmlns:prism="http://www.codeplex.com/prism"
     Title="Mobilize Desktop"
     Width="800"
-    Height="450">
-    <ItemsControl Name="MainRegion" prism:RegionManager.RegionName="MainRegion" />
+    Height="450"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+    TextElement.FontSize="12"
+    TextElement.FontWeight="Medium"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.167*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <ContentControl prism:RegionManager.RegionName="Toolbar" />
+        </StackPanel>
+        <DockPanel Grid.Column="1">
+            <ContentControl prism:RegionManager.RegionName="Header" DockPanel.Dock="Top" />
+            <ContentControl prism:RegionManager.RegionName="Left" DockPanel.Dock="Left" />
+            <ContentControl prism:RegionManager.RegionName="Right" DockPanel.Dock="Right" />
+            <ContentControl prism:RegionManager.RegionName="Footer" DockPanel.Dock="Bottom" />
+            <ContentControl prism:RegionManager.RegionName="Content" />
+        </DockPanel>
+    </Grid>
+
 </Window>

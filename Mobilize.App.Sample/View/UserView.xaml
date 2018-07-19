@@ -1,0 +1,44 @@
+﻿<UserControl
+    x:Class="Mobilize.App.Sample.View.UserView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Mobilize.App.Sample.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="clr-namespace:Mobilize.App.Sample.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <viewModel:UserViewModel />
+    </UserControl.DataContext>
+
+    <StackPanel>
+
+        <TextBox
+            x:Name="NameTextBox"
+            materialDesign:HintAssist.Hint="Name"
+            Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBox
+            x:Name="LastNameTextBox"
+            materialDesign:HintAssist.Hint="Last Name"
+            Text="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" />
+
+        <DatePicker
+            Width="100"
+            materialDesign:HintAssist.Hint="Birth Date"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+            Text="{Binding Path=BirthDate, UpdateSourceTrigger=PropertyChanged}" />
+
+        <ComboBox
+            materialDesign:HintAssist.Hint="Company"
+            materialDesign:HintAssist.HintOpacity=".26"
+            IsEditable="True"
+            ItemsSource="{Binding Path=Companies}"
+            SelectedItem="{Binding Path=Company, UpdateSourceTrigger=PropertyChanged}" />
+
+    </StackPanel>
+</UserControl>

@@ -30,6 +30,6 @@ namespace Mobilize.App.Graph
         /// <summary>
         /// Notifies the module that it has be initialized.
         /// </summary>
-        public void Initialize() => this.regionManager.RegisterViewWithRegion("MainRegion", typeof(GraphView));
+        public void Initialize() => this.regionManager.RegisterViewWithRegion("Content", typeof(GraphView));
     }
 }
