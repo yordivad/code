@@ -9,10 +9,9 @@ namespace Mobilize.App.Sample.ViewModels
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Reactive.Linq;
 
-    using Mobilize.App.Sample.Middleware.Specification;
+    using Mobilize.App.Sample.Model;
     using Mobilize.App.Sample.State;
 
     using ReactiveUI;
@@ -35,8 +34,7 @@ namespace Mobilize.App.Sample.ViewModels
         public UserListViewModel(ISampleStore store = null)
         {
             this.store = store;
-            this.store.State.Select(Specs.GetUsers)
-                .Subscribe(c => this.Users = c.Select(u => new UserDetailViewModel(u)));
+            store.State.Select(this.GetUsers).Subscribe(users => this.Users = users);
         }
 
         /// <summary>
@@ -49,6 +47,13 @@ namespace Mobilize.App.Sample.ViewModels
         /// <summary>
         /// Gets or sets the Users
         /// </summary>
-        public IEnumerable<UserDetailViewModel> Users { get; set; }
+        public IEnumerable<User> Users { get; set; }
+
+        /// <summary>
+        /// Gets the users view model.
+        /// </summary>
+        /// <param name="state">The state.</param>
+        /// <returns>The collection of the users.</returns>
+        private IEnumerable<User> GetUsers(SampleState state) => state.Users;
     }
 }

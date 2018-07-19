@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// <copyright file="Company.cs" company="Mobilize">
+// <copyright file="SelectedCompany.cs" company="Mobilize">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -10,7 +10,7 @@ namespace Mobilize.App.Sample.Model
     using System.Collections.Generic;
 
     /// <summary>
-    /// Class Company.
+    /// Class SelectedCompany.
     /// </summary>
     public class Company
     {

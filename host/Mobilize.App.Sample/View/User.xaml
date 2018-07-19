@@ -19,6 +19,7 @@
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
         <local:UserList Grid.Column="0" />
+
         <StackPanel Grid.Column="1" Orientation="Vertical">
 
             <ToolBarTray>
@@ -38,8 +39,9 @@
                     </Button>
                 </ToolBar>
             </ToolBarTray>
+            <local:UserDetail Grid.Column="1" DataContext="{Binding SelectedUser}" />
 
-            <local:UserDetail />
         </StackPanel>
+
     </Grid>
 </UserControl>

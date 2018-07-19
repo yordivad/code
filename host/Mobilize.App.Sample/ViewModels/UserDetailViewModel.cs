@@ -21,20 +21,9 @@ namespace Mobilize.App.Sample.ViewModels
     public class UserDetailViewModel : ReactiveObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserDetailViewModel"/> class.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        public UserDetailViewModel(User user = null)
-        {
-            this.WhenAnyValue(c => c.Name).BindTo(user, m => m.Name);
-            this.WhenAnyValue(c => c.LastName).BindTo(user, m => m.LastName);
-        }
-
-        /// <summary>
         /// Gets or sets the birth date.
         /// </summary>
         [Reactive]
-
         public DateTime BirthDate { get; set; }
 
         /// <summary>
@@ -49,10 +38,10 @@ namespace Mobilize.App.Sample.ViewModels
         public IEnumerable<Company> Companies { get; set; }
 
         /// <summary>
-        /// Gets or sets the Company
+        /// Gets or sets the SelectedCompany
         /// </summary>
         [Reactive]
-        public Company Company { get; set; }
+        public Company SelectedCompany { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is selected.

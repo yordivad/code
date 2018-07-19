@@ -11,11 +11,6 @@
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
-
-
-
-
-
     <StackPanel UseLayoutRounding="False">
 
         <TextBox
@@ -42,13 +37,11 @@
         <ComboBox
             x:Name="Company"
             Margin="10"
-            materialDesign:HintAssist.Hint="Company"
+            materialDesign:HintAssist.Hint="SelectedCompany"
             IsEditable="True"
             ItemsSource="{Binding Companies}"
             SelectedItem="{Binding Company, UpdateSourceTrigger=PropertyChanged}"
             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
-
-
 
     </StackPanel>
 

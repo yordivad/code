@@ -45,7 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Middleware\Action\" />
     <Folder Include="Middleware\Reducer\" />
   </ItemGroup>
 
