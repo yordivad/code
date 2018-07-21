@@ -38,6 +38,7 @@
     <UpToDateCheckInput Include="**\*.xaml" />
     <ApplicationDefinition Include="App.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
     <Page Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" Exclude="App.xaml" />
+    <ProjectReference Include="..\Mobilize.App.Sample\Mobilize.App.Sample.csproj" />
     <Compile Update="**\*.xaml.cs" SubType="Designer" DependentUpon="%(Filename)" />
   </ItemGroup>
 

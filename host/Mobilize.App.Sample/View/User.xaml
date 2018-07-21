@@ -18,10 +18,12 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
-        <local:UserList Grid.Column="0" />
+
+
+        <local:UserList Grid.Column="0" MyLabel="{Binding Greeting}" />
+
 
         <StackPanel Grid.Column="1" Orientation="Vertical">
-
             <ToolBarTray>
                 <ToolBar ClipToBounds="False" Style="{DynamicResource MaterialDesignToolBar}">
                     <Button Command="{Binding AddCommand}" ToolTip="Add">

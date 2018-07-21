@@ -5,33 +5,39 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:Mobilize.App.Sample.Model"
     xmlns:mvvm="http://prismlibrary.com/"
-    xmlns:viewModel="clr-namespace:Mobilize.App.Sample.ViewModels"
+    xmlns:view="clr-namespace:Mobilize.App.Sample.View"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    mvvm:ViewModelLocator.AutoWireViewModel="True"
+   
     mc:Ignorable="d">
 
-
-    <StackPanel VerticalAlignment="Stretch" Orientation="Vertical">
+    <StackPanel
+        VerticalAlignment="Stretch"
+        DataContext="{Binding ViewModel}"
+        Orientation="Vertical">
 
         <Grid Margin="10" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+
             <TextBox
                 Grid.Column="0"
                 MinWidth="100"
                 Margin="8,0,0,0"
                 VerticalAlignment="Center"
-                materialDesign:HintAssist.Hint="Search"
+                materialDesign:HintAssist.Hint="{Binding Label}"
                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                 BorderThickness="0"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}" />
             <Button Grid.Column="1" Style="{DynamicResource MaterialDesignToolButton}">
                 <materialDesign:PackIcon Margin="8,0,0,0" Kind="Magnify" />
             </Button>
+
         </Grid>
 
         <ItemsControl
@@ -39,7 +45,7 @@
             Grid.IsSharedSizeScope="True"
             ItemsSource="{Binding Users}">
             <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type viewModel:UserDetailViewModel}">
+                <DataTemplate DataType="{x:Type model:User}">
                     <Border
                         x:Name="Border"
                         Padding="8"
@@ -54,11 +60,11 @@
                             </Grid.ColumnDefinitions>
 
 
-                            <ToggleButton
+                            <!--<ToggleButton
                                 VerticalAlignment="Center"
                                 Content="{Binding Code}"
                                 IsChecked="{Binding IsSelected}"
-                                Style="{StaticResource MaterialDesignActionLightToggleButton}" />
+                                Style="{StaticResource MaterialDesignActionLightToggleButton}" />-->
 
 
                             <StackPanel Grid.Column="1" Margin="8,0,0,0">

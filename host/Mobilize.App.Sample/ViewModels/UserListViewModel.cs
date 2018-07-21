@@ -7,12 +7,9 @@
 
 namespace Mobilize.App.Sample.ViewModels
 {
-    using System;
     using System.Collections.Generic;
-    using System.Reactive.Linq;
 
     using Mobilize.App.Sample.Model;
-    using Mobilize.App.Sample.State;
 
     using ReactiveUI;
     using ReactiveUI.Fody.Helpers;
@@ -22,38 +19,27 @@ namespace Mobilize.App.Sample.ViewModels
     /// </summary>
     public class UserListViewModel : ReactiveObject
     {
-        /// <summary>
-        /// The store
-        /// </summary>
-        private readonly ISampleStore store;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserListViewModel"/> class.
         /// </summary>
-        /// <param name="store">The store.</param>
-        public UserListViewModel(ISampleStore store = null)
+        public UserListViewModel()
         {
-            this.store = store;
-            store.State.Select(this.GetUsers).Subscribe(users => this.Users = users);
+            this.Label = "Good";
         }
 
         /// <summary>
-        /// Gets or sets the filter.
+        /// Gets or sets the users.
         /// </summary>
-        /// <value>The filter.</value>
+        /// <value>The users.</value>
         [Reactive]
-        public string Filter { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Users
-        /// </summary>
         public IEnumerable<User> Users { get; set; }
 
         /// <summary>
-        /// Gets the users view model.
+        /// Gets or sets the label.
         /// </summary>
-        /// <param name="state">The state.</param>
-        /// <returns>The collection of the users.</returns>
-        private IEnumerable<User> GetUsers(SampleState state) => state.Users;
+        /// <value>The label.</value>
+        [Reactive]
+        public string Label { get; set; }
     }
 }

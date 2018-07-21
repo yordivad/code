@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// <copyright file="SelectedUser.xaml.cs" company="Mobilize">
+// <copyright file="User.xaml.cs" company="Mobilize">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -8,6 +8,10 @@
 namespace Mobilize.App.Sample.View
 {
     using System.Windows.Controls;
+
+    using Mobilize.App.Sample.ViewModels;
+
+    using ReactiveUI;
 
     /// <summary>
     /// Interaction logic for SelectedUser.xaml
@@ -21,5 +25,6 @@ namespace Mobilize.App.Sample.View
         {
             this.InitializeComponent();
         }
+
     }
 }

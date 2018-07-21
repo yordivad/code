@@ -38,30 +38,11 @@
   <ItemGroup>
     <UpToDateCheckInput Include="**\*.xaml" />
     <Page Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
-    <UpToDateCheckInput Remove="View\User.xaml" />
-    <UpToDateCheckInput Remove="View\UserDetail.xaml" />
-    <UpToDateCheckInput Remove="View\UserList.xaml" />
     <Compile Update="**\*.xaml.cs" SubType="Designer" DependentUpon="%(Filename)" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Middleware\Reducer\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="View\UserList.xaml.cs">
-      <DependentUpon>UserList.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\UserDetail.xaml.cs">
-      <DependentUpon>UserDetail.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\User.xaml.cs">
-      <DependentUpon>User.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-
-
-
 
 </Project>

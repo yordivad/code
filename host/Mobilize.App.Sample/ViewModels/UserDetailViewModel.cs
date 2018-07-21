@@ -20,6 +20,11 @@ namespace Mobilize.App.Sample.ViewModels
     /// </summary>
     public class UserDetailViewModel : ReactiveObject
     {
+        public UserDetailViewModel()
+        {
+            
+        }
+
         /// <summary>
         /// Gets or sets the birth date.
         /// </summary>
